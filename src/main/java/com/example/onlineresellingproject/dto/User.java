@@ -1,6 +1,11 @@
-package com.example.onlineresellingproject.dto.modeldto;
+package com.example.onlineresellingproject.dto;
 
-public class UserDTO {
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
+public class User {
 
     private Integer id;
 
