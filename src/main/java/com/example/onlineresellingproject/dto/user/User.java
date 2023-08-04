@@ -1,13 +1,15 @@
-package com.example.onlineresellingproject.dto;
+package com.example.onlineresellingproject.dto.user;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
-public class User {
+public class User extends UserDTO {
 
-    private Integer id;
+    private Long id;
 
     private String email;
 

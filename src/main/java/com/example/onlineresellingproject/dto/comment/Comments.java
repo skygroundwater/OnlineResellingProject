@@ -1,4 +1,4 @@
-package com.example.onlineresellingproject.dto;
+package com.example.onlineresellingproject.dto.comment;
 
 import lombok.Builder;
 import lombok.Data;
