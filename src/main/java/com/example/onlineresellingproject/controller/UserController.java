@@ -1,8 +1,8 @@
 package com.example.onlineresellingproject.controller;
 
-import com.example.onlineresellingproject.dto.NewPassword;
-import com.example.onlineresellingproject.dto.UpdateUser;
-import com.example.onlineresellingproject.dto.User;
+import com.example.onlineresellingproject.dto.user.NewPassword;
+import com.example.onlineresellingproject.dto.user.UpdateUser;
+import com.example.onlineresellingproject.dto.user.User;
 import com.example.onlineresellingproject.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -31,7 +31,7 @@ public class UserController {
     @GetMapping("/me")
     public ResponseEntity<User> getUser() {
         return ResponseEntity.ok(User.builder()
-                .id(1)
+                .id(1L)
                 .login("anylogin")
                 .phone("justPhone")
                 .email("developer@skypro.ru")

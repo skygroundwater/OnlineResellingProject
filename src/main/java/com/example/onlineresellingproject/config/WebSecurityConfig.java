@@ -1,6 +1,6 @@
 package com.example.onlineresellingproject.config;
 
-import com.example.onlineresellingproject.dto.Role;
+import com.example.onlineresellingproject.dto.user.Role;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

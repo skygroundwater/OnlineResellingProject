@@ -1,13 +1,15 @@
-package com.example.onlineresellingproject.dto;
+package com.example.onlineresellingproject.dto.ad;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
-public class ExtendedAd {
+public class ExtendedAd extends AdDTO{
 
-    private Integer pk;
+    private Long pk;
 
     private String authorFirstName;
 

@@ -1,4 +1,7 @@
 package com.example.onlineresellingproject.service;
 
-public interface UserService {
+import com.example.onlineresellingproject.entity.UserEntity;
+
+public interface UserService extends OnlineResellingProjectService<UserEntity> {
+
 }

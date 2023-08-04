@@ -1,6 +1,6 @@
 package com.example.onlineresellingproject.service.impl;
 
-import com.example.onlineresellingproject.dto.Register;
+import com.example.onlineresellingproject.dto.user.Register;
 import com.example.onlineresellingproject.service.AuthService;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
