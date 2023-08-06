@@ -5,4 +5,5 @@ import com.example.onlineresellingproject.entity.AdEntity;
 
 public abstract class AdDTO implements DTO<AdEntity> {
 
+
 }

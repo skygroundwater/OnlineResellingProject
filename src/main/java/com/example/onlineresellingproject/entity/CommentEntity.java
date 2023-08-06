@@ -1,7 +1,6 @@
 package com.example.onlineresellingproject.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -15,17 +14,20 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "comments")
+@Builder
 @Getter
 @Setter
-public class CommentEntity extends OnlineResellingProjectAbstractModel {
+@NoArgsConstructor
+@AllArgsConstructor
+public class CommentEntity extends ProjectEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(referencedColumnName = "id", name = "author")
-    private UserEntity author;
+    @JoinColumn(referencedColumnName = "id", name = "user")
+    private UserEntity user;
 
     @ManyToOne
     @JoinColumn(referencedColumnName = "id", name = "ad")
@@ -36,5 +38,4 @@ public class CommentEntity extends OnlineResellingProjectAbstractModel {
 
     @Column(name = "text")
     private String text;
-
 }

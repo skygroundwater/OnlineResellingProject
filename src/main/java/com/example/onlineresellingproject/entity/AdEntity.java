@@ -1,8 +1,6 @@
 package com.example.onlineresellingproject.entity;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,7 +11,9 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-public class AdEntity extends OnlineResellingProjectAbstractModel {
+@NoArgsConstructor
+@AllArgsConstructor
+public class AdEntity extends ProjectEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,8 +40,4 @@ public class AdEntity extends OnlineResellingProjectAbstractModel {
 
     @Column(name = "description")
     private String description;
-
-    public AdEntity() {
-
-    }
 }

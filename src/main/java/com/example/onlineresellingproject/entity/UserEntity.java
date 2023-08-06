@@ -2,8 +2,7 @@ package com.example.onlineresellingproject.entity;
 
 
 import com.example.onlineresellingproject.dto.user.Role;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
@@ -13,7 +12,10 @@ import java.util.List;
 @Table(name = "users")
 @Getter
 @Setter
-public class UserEntity extends OnlineResellingProjectAbstractModel {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserEntity extends ProjectEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,10 +47,10 @@ public class UserEntity extends OnlineResellingProjectAbstractModel {
     @Column(name = "image")
     private String image;
 
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<AdEntity> ads;
 
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<CommentEntity> comments;
 
 }

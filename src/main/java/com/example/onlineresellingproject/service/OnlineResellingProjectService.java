@@ -1,15 +1,22 @@
 package com.example.onlineresellingproject.service;
 
-import com.example.onlineresellingproject.entity.OnlineResellingProjectAbstractModel;
+import com.example.onlineresellingproject.dto.DTO;
+import com.example.onlineresellingproject.entity.ProjectEntity;
 
-public interface OnlineResellingProjectService<M extends OnlineResellingProjectAbstractModel> {
+import java.util.List;
 
-    M post(M m);
+public interface OnlineResellingProjectService<M extends ProjectEntity, O, D extends DTO<M>> {
 
-    M patch(M m);
+    M post(M model);
 
-    void delete(Long id);
+    M patch(M model);
 
-    M get(Long id);
+    void delete(O key);
+
+    M get(O key);
+
+    List<M> findAll();
+
+    D createOrUpdate(O key, D dto);
 
 }

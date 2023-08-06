@@ -1,6 +1,6 @@
 package com.example.onlineresellingproject.exceptions;
 
-import com.example.onlineresellingproject.entity.OnlineResellingProjectAbstractModel;
+import com.example.onlineresellingproject.entity.ProjectEntity;
 
 public class NotValidModelException extends RuntimeException {
 
@@ -12,7 +12,7 @@ public class NotValidModelException extends RuntimeException {
         super("Модель сформирована неверно");
     }
 
-    public NotValidModelException(Class<? extends OnlineResellingProjectAbstractModel> clazz){
+    public NotValidModelException(Class<? extends ProjectEntity> clazz){
         super("Модель класса " + clazz.getSimpleName() + " сформирована неверно");
     }
 }
