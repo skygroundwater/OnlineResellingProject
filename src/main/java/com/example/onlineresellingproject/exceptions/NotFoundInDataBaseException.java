@@ -1,6 +1,6 @@
 package com.example.onlineresellingproject.exceptions;
 
-import com.example.onlineresellingproject.entity.OnlineResellingProjectAbstractModel;
+import com.example.onlineresellingproject.entity.ProjectEntity;
 
 public class NotFoundInDataBaseException extends RuntimeException {
 
@@ -12,7 +12,7 @@ public class NotFoundInDataBaseException extends RuntimeException {
         super("Объект не найден в базе данных");
     }
 
-    public NotFoundInDataBaseException(OnlineResellingProjectAbstractModel model){
+    public NotFoundInDataBaseException(ProjectEntity model){
         super("Модель класса " + model.getClass().getSimpleName() + " не найдена в базе");
     }
 

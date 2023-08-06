@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 @Builder
 public class NewPassword extends UserDTO {
 
-    String currentPassword;
+    String userPassword;
 
     String newPassword;
 
