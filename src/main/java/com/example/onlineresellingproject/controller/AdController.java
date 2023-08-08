@@ -7,16 +7,12 @@ import com.example.onlineresellingproject.dto.ad.ExtendedAd;
 import com.example.onlineresellingproject.dto.comment.Comment;
 import com.example.onlineresellingproject.dto.comment.Comments;
 import com.example.onlineresellingproject.dto.comment.CreateOrUpdateComment;
-import com.example.onlineresellingproject.dto.user.User;
-import com.example.onlineresellingproject.entity.AdEntity;
-import com.example.onlineresellingproject.entity.CommentEntity;
-import com.example.onlineresellingproject.entity.UserEntity;
 import com.example.onlineresellingproject.service.AdService;
 import com.example.onlineresellingproject.service.CommentService;
-import com.example.onlineresellingproject.service.OnlineResellingProjectService;
 import com.example.onlineresellingproject.service.UserService;
+import com.example.onlineresellingproject.mappers.AdMapper;
+import com.example.onlineresellingproject.mappers.CommentMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -37,7 +33,9 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/ads")
 public class AdController {
 
-    private final ModelMapper modelMapper;
+    private final AdMapper adMapper;
+
+    private final CommentMapper commentMapper;
 
     private final AdService adService;
 
@@ -45,11 +43,13 @@ public class AdController {
 
     private final CommentService commentService;
 
-    public AdController(ModelMapper modelMapper,
+    public AdController(AdMapper adMapper,
+                        CommentMapper commentMapper,
                         AdService adService,
                         UserService userService,
                         CommentService commentService) {
-        this.modelMapper = modelMapper;
+        this.adMapper = adMapper;
+        this.commentMapper = commentMapper;
         this.adService = adService;
         this.commentService = commentService;
         this.userService = userService;
@@ -57,21 +57,21 @@ public class AdController {
 
     @GetMapping
     public ResponseEntity<Ads> getAllAds() {
-        return ResponseEntity.ok(Ads.map(adService.findAll(), modelMapper));
+        return ResponseEntity.ok(adMapper.mapToAds(adService.findAll()));
     }
 
     @PostMapping
     public ResponseEntity<Ad> addAd(@RequestBody Ad ad,
                                     @RequestPart MultipartFile multipartFile) {
         return ResponseEntity.ok(
-                Ad.mapToDTo(adService.post(
-                        Ad.mapToEntity(ad, userService)), modelMapper));
+                adMapper.mapToAd(adService.post(
+                        adMapper.mapToEntity(ad, userService.get(ad.getUserId())))));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ExtendedAd> getAd(@PathVariable Long id) {
         return ResponseEntity.ok(
-                ExtendedAd.map(adService.get(id), modelMapper));
+                adMapper.mapToExtendedAd(adService.get(id)));
     }
 
     @DeleteMapping("/{id}")
@@ -98,22 +98,23 @@ public class AdController {
     @PatchMapping("/{id}/image")
     public ResponseEntity<Ad> updateImage(@PathVariable Long id,
                                           @RequestPart MultipartFile multipartFile) {
-        return ResponseEntity.ok(Ad.mapToDTo(adService.updateImage(id, multipartFile), modelMapper));
+        return ResponseEntity.ok(adMapper.mapToAd(adService.updateImage(id, multipartFile)));
     }
 
     @GetMapping("/{id}/comments")
     public ResponseEntity<Comments> getComments(@PathVariable Long id) {
         return ResponseEntity.ok(
-                Comments.mapToDTO(
-                        commentService.findCommentsByAdId(id), modelMapper));
+                commentMapper.mapToComments(
+                        commentService.findCommentsByAdId(id)));
     }
 
     @PostMapping("/{id}/comments")
     public ResponseEntity<Comment> addComment(@PathVariable Long id,
                                               @RequestBody Comment comment) {
 
-        return ResponseEntity.ok(Comment.mapToDTO(
-                Comment.mapToEntity(comment, adService.get(id)), modelMapper));
+        return ResponseEntity.ok(commentMapper.mapToComment(
+                commentService.post(
+                        commentMapper.mapToEntity(comment, adService.get(id)))));
     }
 
     @DeleteMapping("/{id}/comments/{commentId}")

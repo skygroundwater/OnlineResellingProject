@@ -14,7 +14,4 @@ public class CreateOrUpdateComment extends CommentDTO {
 
     private String text;
 
-    public static CreateOrUpdateComment map(CommentEntity entity, ModelMapper modelMapper) {
-        return modelMapper.map(entity, CreateOrUpdateComment.class);
-    }
 }

@@ -15,12 +15,6 @@ public class User extends UserDTO {
 
     private String login;
 
-    private String firstName;
-
-    private String lastName;
-
-    private String phone;
-
     private String role;
 
     private String image;

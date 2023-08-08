@@ -29,7 +29,4 @@ public class ExtendedAd extends AdDTO {
 
     private String title;
 
-    public static ExtendedAd map(AdEntity entity, ModelMapper modelMapper){
-        return modelMapper.map(entity, ExtendedAd.class);
-    }
 }

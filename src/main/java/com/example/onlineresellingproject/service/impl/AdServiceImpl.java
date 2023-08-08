@@ -3,12 +3,13 @@ package com.example.onlineresellingproject.service.impl;
 import com.example.onlineresellingproject.dto.ad.CreateOrUpdateAd;
 import com.example.onlineresellingproject.entity.AdEntity;
 import com.example.onlineresellingproject.repository.AdEntityRepo;
+import com.example.onlineresellingproject.service.AdService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-public class AdServiceImpl extends AbstractService<AdEntity, Long, AdEntityRepo, CreateOrUpdateAd> implements com.example.onlineresellingproject.service.AdService {
+public class AdServiceImpl extends AbstractService<AdEntity, Long, AdEntityRepo, CreateOrUpdateAd> implements AdService {
     AdServiceImpl(AdEntityRepo repository,
                   ModelMapper modelMapper) {
         super(repository, modelMapper);
@@ -20,7 +21,8 @@ public class AdServiceImpl extends AbstractService<AdEntity, Long, AdEntityRepo,
         adEntity.setTitle(dto.getTitle());
         adEntity.setPrice(dto.getPrice());
         adEntity.setDescription(dto.getDescription());
-        return CreateOrUpdateAd.map(post(adEntity), getModelMapper());
+        post(adEntity);
+        return dto;
     }
 
     @Override
