@@ -13,7 +13,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 @Getter
-public abstract class AbstractService<M extends ProjectEntity, O, R extends JpaRepository<M, O>, D extends DTO<M>> implements OnlineResellingProjectService<M, O, D> {
+public abstract class AbstractService<M extends ProjectEntity, O, R extends JpaRepository<M, O>, D extends DTO> implements OnlineResellingProjectService<M, O, D> {
 
     private final R repository;
 

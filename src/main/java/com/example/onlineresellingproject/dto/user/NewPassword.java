@@ -7,10 +7,10 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
-public class NewPassword extends UserDTO {
+public class NewPassword extends Credentials {
 
-    String userPassword;
+    private String userPassword;
 
-    String newPassword;
+    private String newPassword;
 
 }
