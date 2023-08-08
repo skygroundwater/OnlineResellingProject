@@ -4,7 +4,7 @@ import com.example.onlineresellingproject.dto.Login;
 import com.example.onlineresellingproject.dto.Register;
 import com.example.onlineresellingproject.dto.Role;
 
-public class User {
+public class  User {
 
     private Login login;
 
