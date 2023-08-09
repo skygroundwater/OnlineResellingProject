@@ -2,6 +2,7 @@ package com.example.onlineresellingproject.service.impl;
 
 import com.example.onlineresellingproject.dto.ad.CreateOrUpdateAd;
 import com.example.onlineresellingproject.entity.AdEntity;
+import com.example.onlineresellingproject.exceptions.NotFoundInDataBaseException;
 import com.example.onlineresellingproject.repository.AdEntityRepo;
 import com.example.onlineresellingproject.service.AdService;
 import org.modelmapper.ModelMapper;
@@ -29,5 +30,11 @@ public class AdServiceImpl extends AbstractService<AdEntity, Long, AdEntityRepo,
     public AdEntity updateImage(Long id, MultipartFile multipartFile) {
         AdEntity adEntity = get(id);
         return processImage(id, adEntity, multipartFile, "path/to/file/holder");
+    }
+
+    @Override
+    public AdEntity findAdEntityByTitle(String title) {
+        return getRepository().findAdEntityByTitle(title)
+                .orElseThrow(() -> new NotFoundInDataBaseException("Объявление по названию не найдено"));
     }
 }

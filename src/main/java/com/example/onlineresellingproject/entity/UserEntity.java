@@ -6,6 +6,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -21,11 +22,8 @@ public class UserEntity extends ProjectEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "email")
-    private String email;
-
-    @Column(name = "login")
-    private String login;
+    @Column(name = "username")
+    private String username;
 
     @Column(name = "password")
     private String password;
@@ -47,10 +45,25 @@ public class UserEntity extends ProjectEntity {
     @Column(name = "image")
     private String image;
 
+    @Column(name = "reg_date")
+    private LocalDateTime registrationDate = LocalDateTime.now();
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<AdEntity> ads;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<CommentEntity> comments;
+
+    @Column(name = "non_expired")
+    private boolean nonExpired = true;
+
+    @Column(name = "non_locked")
+    private boolean nonLocked = true;
+
+    @Column(name = "non_credentials_expired")
+    private boolean nonCredentialsExpired = true;
+
+    @Column(name = "is_enabled")
+    private boolean isEnabled = true;
 
 }

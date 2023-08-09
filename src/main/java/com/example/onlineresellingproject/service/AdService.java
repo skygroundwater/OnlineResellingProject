@@ -5,4 +5,6 @@ import com.example.onlineresellingproject.entity.AdEntity;
 
 public interface AdService extends OnlineResellingProjectService<AdEntity, Long, CreateOrUpdateAd>, UpdateImageService<AdEntity> {
 
+    AdEntity findAdEntityByTitle(String title);
+
 }
