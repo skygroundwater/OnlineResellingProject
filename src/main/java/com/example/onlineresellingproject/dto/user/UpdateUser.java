@@ -1,14 +1,13 @@
 package com.example.onlineresellingproject.dto.user;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import javax.validation.constraints.Pattern;
+import lombok.NoArgsConstructor;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Builder
+@AllArgsConstructor
 public class UpdateUser extends UserDTO {
 
 

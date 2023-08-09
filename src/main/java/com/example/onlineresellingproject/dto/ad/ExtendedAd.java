@@ -19,7 +19,7 @@ public class ExtendedAd extends AdDTO {
 
     private String description;
 
-    private String userEmail;
+    private String userUsername;
 
     private String image;
 
