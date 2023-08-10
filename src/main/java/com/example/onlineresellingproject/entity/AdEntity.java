@@ -20,14 +20,14 @@ public class AdEntity extends ProjectEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(referencedColumnName = "id", name = "user")
+    @JoinColumn(referencedColumnName = "id")
     private UserEntity user;
 
     @OneToMany(mappedBy = "ad", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<CommentEntity> comments;
 
     @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @Column(name = "image")
     private String image;

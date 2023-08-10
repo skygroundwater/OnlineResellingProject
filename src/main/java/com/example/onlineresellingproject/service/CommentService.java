@@ -5,7 +5,17 @@ import com.example.onlineresellingproject.entity.CommentEntity;
 
 import java.util.List;
 
-public interface CommentService extends OnlineResellingProjectService<CommentEntity, Long, CreateOrUpdateComment> {
+public interface CommentService {
+
+    CommentEntity post(CommentEntity model);
+
+    CommentEntity patch(CommentEntity model);
+
+    void delete(Long id);
+
+    CommentEntity get(Long id);
+
+    CreateOrUpdateComment createOrUpdate(Long key, CreateOrUpdateComment dto);
 
     List<CommentEntity> findCommentsByAdId(Long id);
 

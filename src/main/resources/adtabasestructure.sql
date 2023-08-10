@@ -1,16 +1,20 @@
 create table users
 (
-    id         bigserial
+    id                      bigserial
         constraint users_pk
             primary key,
-    email      varchar,
-    login      varchar,
-    password   varchar,
-    first_name varchar,
-    last_name  varchar,
-    phone      varchar,
-    role       varchar,
-    image      varchar
+    username                varchar,
+    password                varchar,
+    first_name              varchar,
+    last_name               varchar,
+    phone                   varchar,
+    role                    varchar,
+    image                   varchar,
+    reg_date                timestamp,
+    non_expired             boolean default true,
+    non_locked              boolean default true,
+    non_credentials_expired boolean default true,
+    is_enabled              boolean default true
 );
 
 alter table users
@@ -24,7 +28,7 @@ create table ads
     image       varchar,
     price       integer,
     title       varchar(1500),
-    "user"      bigint
+    user_id     bigint
         constraint ads_users_id_fk
             references users,
     created_at  timestamp,

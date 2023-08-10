@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 @Builder
 public class NewPassword extends Credentials {
 
-    private String userPassword;
+    private String currentPassword;
 
     private String newPassword;
 

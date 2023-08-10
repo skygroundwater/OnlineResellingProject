@@ -18,37 +18,37 @@ public class UserWrapper implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singletonList(
-                new SimpleGrantedAuthority(userEntity.getRole().toString())
+                new SimpleGrantedAuthority(this.userEntity.getRole().toString())
         );
     }
 
     @Override
     public String getPassword() {
-        return userEntity.getPassword();
+        return this.userEntity.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return userEntity.getUsername();
+        return this.userEntity.getUsername();
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return userEntity.isNonExpired();
+        return this.userEntity.isNonExpired();
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return userEntity.isNonLocked();
+        return this.userEntity.isNonLocked();
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return userEntity.isNonCredentialsExpired();
+        return this.userEntity.isNonCredentialsExpired();
     }
 
     @Override
     public boolean isEnabled() {
-        return userEntity.isEnabled();
+        return this.userEntity.isEnabled();
     }
 }
