@@ -1,45 +1,49 @@
 package com.example.onlineresellingproject.service.impl;
 
-import com.example.onlineresellingproject.dto.Register;
+import com.example.onlineresellingproject.dto.user.Register;
+import com.example.onlineresellingproject.entity.UserEntity;
 import com.example.onlineresellingproject.service.AuthService;
-import org.springframework.security.core.userdetails.User;
+import com.example.onlineresellingproject.service.UserService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
+
+import java.nio.CharBuffer;
 
 @Service
 public class  AuthServiceImpl implements AuthService {
 
-    private final UserDetailsManager manager;
+    private final UserService userService;
     private final PasswordEncoder encoder;
 
-    public AuthServiceImpl(UserDetailsManager manager,
+    public AuthServiceImpl(UserService userService,
                            PasswordEncoder passwordEncoder) {
-        this.manager = manager;
+        this.userService = userService;
         this.encoder = passwordEncoder;
     }
 
     @Override
-    public boolean login(String userName, String password) {
-        if (!manager.userExists(userName)) {
+    public boolean login(String userName, char[] password) {
+        if (!userService.userExists(userName)) {
             return false;
         }
-        UserDetails userDetails = manager.loadUserByUsername(userName);
-        return encoder.matches(password, userDetails.getPassword());
+        UserDetails userDetails = userService.loadUserByUsername(userName);
+        return encoder.matches(CharBuffer.wrap(password), userDetails.getPassword());
     }
 
     @Override
     public boolean register(Register register) {
-        if (manager.userExists(register.getUsername())) {
+        if (userService.userExists(register.getUsername())) {
             return false;
         }
-        manager.createUser(
-                User.builder()
-                        .passwordEncoder(this.encoder::encode)
-                        .password(register.getPassword())
+        userService.post(
+                UserEntity.builder()
+                        .password(encoder.encode(CharBuffer.wrap(register.getPassword())))
                         .username(register.getUsername())
-                        .roles(register.getRole().name())
+                        .firstName(register.getFirstName())
+                        .lastName(register.getLastName())
+                        .phone(register.getPhone())
+                        .role(register.getRole())
                         .build());
         return true;
     }
