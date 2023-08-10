@@ -23,16 +23,35 @@ public class AdMapper implements Mapper {
     }
 
     public Ad mapToAd(AdEntity entity) {
-        return modelMapper.map(entity, Ad.class);
+        Integer adId = Math.toIntExact(entity.getId());
+        Integer userId = Math.toIntExact(entity.getUser().getId());
+
+        return new Ad(adId,
+                userId,
+                entity.getImage(),
+                entity.getPrice(),
+                entity.getTitle());
     }
 
     public ExtendedAd mapToExtendedAd(AdEntity entity) {
-        return modelMapper.map(entity, ExtendedAd.class);
+        UserEntity user = entity.getUser();
+        return ExtendedAd.builder()
+                .email(user.getUsername())
+                .authorFirstName(user.getFirstName())
+                .authorLastName(user.getLastName())
+                .phone(user.getPhone())
+                .image(entity.getImage())
+                .description(entity.getDescription())
+                .price(entity.getPrice())
+                .title(entity.getTitle())
+                .pk(Math.toIntExact(entity.getId()))
+                .build();
     }
 
     public Ads mapToAds(List<AdEntity> adEntities) {
         return Ads.builder()
-                .ads(adEntities.stream().map(this::mapToAd)
+                .ads(adEntities.stream()
+                        .map(this::mapToAd)
                         .collect(Collectors.toList()))
                 .count(adEntities.size()).build();
     }
@@ -40,7 +59,6 @@ public class AdMapper implements Mapper {
     public AdEntity mapToEntity(Ad ad, UserEntity userEntity) {
         if (userEntity != null) {
             return AdEntity.builder()
-                    .description(ad.getDescription())
                     .title(ad.getTitle()).price(ad.getPrice())
                     .createdAt(LocalDateTime.now())
                     .user(userEntity).image(ad.getImage())

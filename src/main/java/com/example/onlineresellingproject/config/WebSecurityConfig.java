@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextHolderStrategy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,6 +16,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import java.net.PasswordAuthentication;
+
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
@@ -21,6 +25,8 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class WebSecurityConfig {
 
     private final UserDetailsService userDetailsService;
+
+    private SecurityContextHolderStrategy context = SecurityContextHolder.getContextHolderStrategy();
 
     @Autowired
     public WebSecurityConfig(UserDetailsService userDetailsService) {
@@ -40,8 +46,8 @@ public class WebSecurityConfig {
     public InMemoryUserDetailsManager userDetailsService(PasswordEncoder passwordEncoder) {
         UserDetails user =
                 User.builder()
-                        .username("user@gmail.com")
-                        .password("password")
+                        .username("o.metelev2020@yandex.ru")
+                        .password("pupsichka")
                         .passwordEncoder(passwordEncoder::encode)
                         .roles(Role.USER.name())
                         .build();

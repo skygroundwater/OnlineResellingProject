@@ -11,19 +11,19 @@ import org.modelmapper.ModelMapper;
 @Builder
 public class ExtendedAd extends AdDTO {
 
-    private Long id;
+    private Integer pk;
 
-    private String userFirstName;
+    private String authorFirstName;
 
-    private String userLastName;
+    private String authorLastName;
 
     private String description;
 
-    private String userUsername;
+    private String email;
 
     private String image;
 
-    private String userPhone;
+    private String phone;
 
     private Integer price;
 
