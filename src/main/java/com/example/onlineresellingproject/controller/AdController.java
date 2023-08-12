@@ -7,12 +7,12 @@ import com.example.onlineresellingproject.dto.ad.ExtendedAd;
 import com.example.onlineresellingproject.dto.comment.Comment;
 import com.example.onlineresellingproject.dto.comment.Comments;
 import com.example.onlineresellingproject.dto.comment.CreateOrUpdateComment;
-import com.example.onlineresellingproject.service.CommentService;
-import com.example.onlineresellingproject.service.UserService;
 import com.example.onlineresellingproject.mappers.AdMapper;
 import com.example.onlineresellingproject.mappers.CommentMapper;
+import com.example.onlineresellingproject.service.CommentService;
+import com.example.onlineresellingproject.service.FilesService;
+import com.example.onlineresellingproject.service.UserService;
 import com.example.onlineresellingproject.service.impl.AdServiceImpl;
-import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,16 +37,19 @@ public class AdController {
 
     private final CommentService commentService;
 
+    private final FilesService filesService;
+
     public AdController(AdMapper adMapper,
                         CommentMapper commentMapper,
                         AdServiceImpl adService,
                         UserService userService,
-                        CommentService commentService) {
+                        CommentService commentService, FilesService filesService) {
         this.adMapper = adMapper;
         this.commentMapper = commentMapper;
         this.adService = adService;
         this.commentService = commentService;
         this.userService = userService;
+        this.filesService = filesService;
     }
 
     @GetMapping
@@ -94,6 +97,11 @@ public class AdController {
     public ResponseEntity<Ad> updateImage(@PathVariable Long id,
                                           @AuthenticationPrincipal UserDetails userDetails,
                                           @RequestPart MultipartFile multipartFile) {
+
+        String newFileName = filesService.getNewFileName(multipartFile);
+        filesService.saveUserImage(multipartFile, newFileName);
+
+        System.out.println("Ads image upload method call"); // TODO LOG
         return ResponseEntity.ok(adMapper.mapToAd(adService.updateImage(id, userDetails, multipartFile)));
     }
 
