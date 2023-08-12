@@ -3,11 +3,12 @@ package com.example.onlineresellingproject.controller;
 import com.example.onlineresellingproject.dto.user.NewPassword;
 import com.example.onlineresellingproject.dto.user.UpdateUser;
 import com.example.onlineresellingproject.dto.user.User;
-import com.example.onlineresellingproject.entity.UserEntity;
 import com.example.onlineresellingproject.mappers.UserMapper;
+import com.example.onlineresellingproject.service.FilesService;
 import com.example.onlineresellingproject.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,11 +22,13 @@ import org.springframework.web.multipart.MultipartFile;
 public class UserController {
 
     private final UserService userService;
+    private final FilesService filesService;
 
     private final UserMapper userMapper;
 
-    public UserController(UserService userService, UserMapper userMapper) {
+    public UserController(UserService userService, FilesService filesService, UserMapper userMapper) {
         this.userService = userService;
+        this.filesService = filesService;
         this.userMapper = userMapper;
     }
 
@@ -52,10 +55,13 @@ public class UserController {
                         userDetails, updateUser));
     }
 
-    @PatchMapping("/me/image")
+    @PatchMapping(value = "/me/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<HttpStatus> updateUserImage(@AuthenticationPrincipal UserDetails userDetails,
-                                                      @RequestPart MultipartFile multipartFile) {
+                                                      @RequestParam MultipartFile image) {
+        String newFileName = filesService.getNewFileName(image);
+        filesService.saveUserImage(image, newFileName);
 
+        System.out.println("User image upload method call"); // TODO LOG
         return ResponseEntity.ok().build();
     }
 }

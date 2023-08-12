@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
 @RequiredArgsConstructor
-public class AuthController {
+public class  AuthController {
 
     private final AuthService authService;
 

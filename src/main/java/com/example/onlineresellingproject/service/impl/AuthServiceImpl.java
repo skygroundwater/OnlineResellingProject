@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.nio.CharBuffer;
 
 @Service
-public class AuthServiceImpl implements AuthService {
+public class  AuthServiceImpl implements AuthService {
 
     private final UserService userService;
     private final PasswordEncoder encoder;
