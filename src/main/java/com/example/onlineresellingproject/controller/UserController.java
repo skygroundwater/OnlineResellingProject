@@ -58,10 +58,10 @@ public class UserController {
     @PatchMapping(value = "/me/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<HttpStatus> updateUserImage(@AuthenticationPrincipal UserDetails userDetails,
                                                       @RequestParam MultipartFile image) {
-        String newFileName = filesService.getNewFileName(image);
-        filesService.saveUserImage(image, newFileName);
+
+        userService.updateImage(userDetails, image);
 
         System.out.println("User image upload method call"); // TODO LOG
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 }

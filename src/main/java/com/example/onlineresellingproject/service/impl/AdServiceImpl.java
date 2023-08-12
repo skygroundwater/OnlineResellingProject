@@ -11,10 +11,7 @@ import com.example.onlineresellingproject.exceptions.NotValidModelException;
 import com.example.onlineresellingproject.mappers.AdMapper;
 import com.example.onlineresellingproject.repository.AdEntityRepo;
 import com.example.onlineresellingproject.service.AdService;
-import com.example.onlineresellingproject.service.UpdateImageService;
 import com.example.onlineresellingproject.service.UserService;
-import io.swagger.v3.oas.annotations.media.Content;
-import jdk.jfr.ContentType;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,7 +23,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class AdServiceImpl implements AdService, UpdateImageService<AdEntity> {
+public class AdServiceImpl implements AdService {
 
 
     private final AdEntityRepo repository;
@@ -92,7 +89,7 @@ public class AdServiceImpl implements AdService, UpdateImageService<AdEntity> {
     @Override
     public AdEntity updateImage(Long id, UserDetails userDetails, MultipartFile multipartFile) {
         AdEntity adEntity = get(id);
-        return processImage(id, adEntity, multipartFile, "path/to/file/holder");
+        return adEntity;
     }
 
     @Override

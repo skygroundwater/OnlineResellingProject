@@ -15,10 +15,10 @@ import javax.servlet.MultipartConfigElement;
 public class MultipartConfig {
 
     @Bean
-    MultipartConfigElement multipartConfigElement() {
+    public MultipartConfigElement multipartConfigElement() {
         MultipartConfigFactory factory = new MultipartConfigFactory();
-        factory.setMaxFileSize(DataSize.parse("128KB"));
-        factory.setMaxRequestSize(DataSize.parse("128KB"));
+        factory.setMaxFileSize(DataSize.parse("5000KB"));
+        factory.setMaxRequestSize(DataSize.parse("5000KB"));
         return factory.createMultipartConfig();
     }
 
