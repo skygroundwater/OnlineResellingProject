@@ -19,17 +19,24 @@ public class FilesServiceImpl implements FilesService {
 
     @Value("${path.to.image.users}")
     private String usersImagesPath;
+
     @Value("${path.to.image.ads}")
     private String adsImagesPath;
 
     @Value("${path.to.image}")
     private String imagesPath;
 
+    Path path;
+
+    Path path1;
+
+    Path path2;
+
     @PostConstruct
     private void init() {
-        Path path = Path.of(imagesPath);
-        Path path1 = Path.of(usersImagesPath);
-        Path path2 = Path.of(adsImagesPath);
+        path = Path.of(imagesPath);
+        path1 = Path.of(usersImagesPath);
+        path2 = Path.of(adsImagesPath);
         try {
             if (Files.notExists(path)) {
                 Files.createDirectory(path.toAbsolutePath());
@@ -48,9 +55,11 @@ public class FilesServiceImpl implements FilesService {
 
 
     @Override
-    public void saveUserImage(MultipartFile file, String newFileName) {
-        File newFile = new File(usersImagesPath + File.separator + newFileName);
+    public String saveUserImage(MultipartFile file, String newFileName) {
+        String filePathInStorage = usersImagesPath + File.separator + newFileName;
+        File newFile = new File(filePathInStorage);
         uploadFile(file, newFile);
+        return filePathInStorage;
     }
 
     @Override

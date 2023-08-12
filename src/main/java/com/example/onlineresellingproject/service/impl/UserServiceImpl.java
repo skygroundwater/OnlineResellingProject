@@ -1,16 +1,14 @@
 package com.example.onlineresellingproject.service.impl;
 
-import com.example.onlineresellingproject.dto.ad.Ads;
 import com.example.onlineresellingproject.dto.user.NewPassword;
 import com.example.onlineresellingproject.dto.user.UpdateUser;
-import com.example.onlineresellingproject.dto.user.User;
 import com.example.onlineresellingproject.entity.UserEntity;
 import com.example.onlineresellingproject.entity.UserWrapper;
 import com.example.onlineresellingproject.exceptions.NotFoundInDataBaseException;
 import com.example.onlineresellingproject.exceptions.NotValidModelException;
 import com.example.onlineresellingproject.mappers.UserMapper;
 import com.example.onlineresellingproject.repository.UserEntityRepo;
-import com.example.onlineresellingproject.service.UpdateImageService;
+import com.example.onlineresellingproject.service.FilesService;
 import com.example.onlineresellingproject.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -23,11 +21,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService, UpdateImageService<UserEntity> {
+public class UserServiceImpl implements UserService{
 
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     private final UserMapper userMapper;
+
+    private final FilesService filesService;
 
     private final UserEntityRepo repository;
 
@@ -58,9 +58,11 @@ public class UserServiceImpl implements UserService, UpdateImageService<UserEnti
     }
 
     @Override
-    public UserEntity updateImage(Long id, UserDetails userDetails, MultipartFile multipartFile) {
+    public UserEntity updateImage(UserDetails userDetails, MultipartFile multipartFile) {
         UserEntity userEntity = findUserEntityByLogin(userDetails.getUsername());
-        return processImage(id, userEntity, multipartFile, "path/to/file/holder");
+        String newFileName = filesService.getNewFileName(multipartFile);
+        userEntity.setImage(filesService.saveUserImage(multipartFile, newFileName));
+        return patch(userEntity);
     }
 
     @Override

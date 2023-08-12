@@ -26,6 +26,8 @@ public interface AdService {
                       CreateOrUpdateAd dto,
                       MultipartFile multipartFile);
 
+    AdEntity updateImage(Long id, UserDetails userDetails, MultipartFile multipartFile);
+
     AdEntity findAdEntityByTitle(String title);
 
     List<AdEntity> findAllAdsByUser(UserEntity userEntity);
