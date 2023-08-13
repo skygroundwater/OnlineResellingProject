@@ -17,14 +17,14 @@ import java.util.UUID;
 @Slf4j
 public class FilesServiceImpl implements FilesService {
 
+    @Value("${path.to.image}")
+    private String imagesPath;
+
     @Value("${path.to.image.users}")
     private String usersImagesPath;
 
     @Value("${path.to.image.ads}")
     private String adsImagesPath;
-
-    @Value("${path.to.image}")
-    private String imagesPath;
 
     Path path;
 
@@ -35,8 +35,8 @@ public class FilesServiceImpl implements FilesService {
     @PostConstruct
     private void init() {
         path = Path.of(imagesPath);
-        path1 = Path.of(usersImagesPath);
-        path2 = Path.of(adsImagesPath);
+        path1 = Path.of(imagesPath + usersImagesPath);
+        path2 = Path.of(imagesPath + adsImagesPath);
         try {
             if (Files.notExists(path)) {
                 Files.createDirectory(path.toAbsolutePath());
@@ -57,15 +57,17 @@ public class FilesServiceImpl implements FilesService {
     @Override
     public String saveUserImage(MultipartFile file, String newFileName) {
         String filePathInStorage = usersImagesPath + File.separator + newFileName;
-        File newFile = new File(filePathInStorage);
+        File newFile = new File(imagesPath + filePathInStorage);
         uploadFile(file, newFile);
         return filePathInStorage;
     }
 
     @Override
-    public void saveAdsImage(MultipartFile file, String newFileName) {
-        File newFile = new File(adsImagesPath + File.separator + newFileName);
+    public String saveAdsImage(MultipartFile file, String newFileName) {
+        String filePathInStorage = adsImagesPath + File.separator + newFileName;
+        File newFile = new File(imagesPath + filePathInStorage);
         uploadFile(file, newFile);
+        return filePathInStorage;
     }
 
 

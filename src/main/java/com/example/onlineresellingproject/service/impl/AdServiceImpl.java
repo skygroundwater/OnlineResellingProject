@@ -11,6 +11,7 @@ import com.example.onlineresellingproject.exceptions.NotValidModelException;
 import com.example.onlineresellingproject.mappers.AdMapper;
 import com.example.onlineresellingproject.repository.AdEntityRepo;
 import com.example.onlineresellingproject.service.AdService;
+import com.example.onlineresellingproject.service.FilesService;
 import com.example.onlineresellingproject.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -28,11 +29,11 @@ public class AdServiceImpl implements AdService {
 
     private final AdEntityRepo repository;
 
-    private final ModelMapper modelMapper;
-
     private final AdMapper adMapper;
 
     private final UserService userService;
+
+    private final FilesService filesService;
 
     @Override
     public final AdEntity post(AdEntity model) {
@@ -82,8 +83,8 @@ public class AdServiceImpl implements AdService {
         adEntity.setDescription(dto.getDescription());
         adEntity.setPrice(dto.getPrice());
         adEntity.setTitle(dto.getTitle());
-        post(adEntity);
-        return adMapper.mapToAd(adEntity);
+        adEntity.setImage(filesService.saveAdsImage(multipartFile, filesService.getNewFileName(multipartFile)));
+        return adMapper.mapToAd(post(adEntity));
     }
 
     @Override
