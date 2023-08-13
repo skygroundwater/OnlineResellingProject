@@ -1,7 +1,10 @@
 package com.example.onlineresellingproject.service.impl;
 
+import com.example.onlineresellingproject.controller.AdController;
 import com.example.onlineresellingproject.service.FilesService;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +20,8 @@ import java.util.UUID;
 @Slf4j
 public class FilesServiceImpl implements FilesService {
 
+    private final Logger logger = LoggerFactory.getLogger(AdController.class);
+
     @Value("${path.to.image}")
     private String imagesPath;
 
@@ -26,20 +31,18 @@ public class FilesServiceImpl implements FilesService {
     @Value("${path.to.image.ads}")
     private String adsImagesPath;
 
-    Path path;
-
-    Path path1;
-
-    Path path2;
-
     @PostConstruct
     private void init() {
-        path = Path.of(imagesPath);
-        path1 = Path.of(imagesPath + usersImagesPath);
-        path2 = Path.of(imagesPath + adsImagesPath);
+        Path path = Path.of(imagesPath);
+        Path path1 = Path.of(imagesPath + usersImagesPath);
+        Path path2 = Path.of(imagesPath + adsImagesPath);
+        Path path3 = Path.of(imagesPath + "/images");
         try {
             if (Files.notExists(path)) {
                 Files.createDirectory(path.toAbsolutePath());
+            }
+            if (Files.notExists(path3)) {
+                Files.createDirectory(path3.toAbsolutePath());
             }
             if (Files.notExists(path1)) {
                 Files.createDirectory(path1.toAbsolutePath());
@@ -49,7 +52,7 @@ public class FilesServiceImpl implements FilesService {
             }
         } catch (IOException e) {
             //todo LOG
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 
@@ -76,6 +79,11 @@ public class FilesServiceImpl implements FilesService {
         String[] split = Objects.requireNonNull(file.getOriginalFilename()).split("\\.");
         String extension = split[split.length - 1];
         return UUID.randomUUID() + "." + extension;
+    }
+
+    public boolean deleteFile(String path) {
+        //TODO delete userImage when update
+        return true;
     }
 
     private void uploadFile(MultipartFile file, File newFile) {

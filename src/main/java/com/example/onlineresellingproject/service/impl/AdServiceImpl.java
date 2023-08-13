@@ -14,7 +14,6 @@ import com.example.onlineresellingproject.service.AdService;
 import com.example.onlineresellingproject.service.FilesService;
 import com.example.onlineresellingproject.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -67,7 +66,7 @@ public class AdServiceImpl implements AdService {
     public final Ads getAds() {
         List<AdEntity> entities = repository.findAll();
         return Ads.builder()
-                .ads(entities.stream()
+                .results(entities.stream()
                         .map(adMapper::mapToAd)
                         .collect(Collectors.toList()))
                 .count(entities.size()).build();

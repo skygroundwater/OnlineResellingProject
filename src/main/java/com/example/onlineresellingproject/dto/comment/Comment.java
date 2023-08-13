@@ -10,17 +10,24 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 public class Comment extends CommentDTO {
+//
+//    private Long id;
+//
+//    private Long userId;
+//
+//    private String userImage;
+//
+//    private String userFirstName;
+//
+//    private LocalDateTime createdAt;
+//
+//    private String text;
 
-    private Long id;
-
-    private Long userId;
-
-    private String userImage;
-
-    private String userFirstName;
-
+    private Long author;
+    private String authorImage;
+    private String authorFirstName;
     private LocalDateTime createdAt;
-
+    private Long pk;
     private String text;
 
 }
