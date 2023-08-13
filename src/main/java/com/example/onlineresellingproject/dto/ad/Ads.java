@@ -11,5 +11,5 @@ public class Ads {
 
     private Integer count;
 
-    private List<Ad> ads;
+    private List<Ad> results;
 }

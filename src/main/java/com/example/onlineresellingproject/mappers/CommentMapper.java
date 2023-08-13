@@ -39,7 +39,7 @@ public class CommentMapper implements Mapper {
 
     public Comments mapToComments(List<CommentEntity> entities) {
         return Comments.builder()
-                .comments(entities.stream().map(this::mapToComment)
+                .results(entities.stream().map(this::mapToComment)
                         .collect(Collectors.toList()))
                 .count(entities.size())
                 .build();

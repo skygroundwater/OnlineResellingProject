@@ -7,6 +7,8 @@ import com.example.onlineresellingproject.mappers.UserMapper;
 import com.example.onlineresellingproject.service.FilesService;
 import com.example.onlineresellingproject.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,8 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+
+    private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private final UserService userService;
     private final FilesService filesService;
@@ -41,6 +45,8 @@ public class UserController {
 
     @GetMapping("/me")
     public ResponseEntity<User> getUser(@AuthenticationPrincipal UserDetails userDetails) {
+
+        logger.info("Get User by login method invoke");
         return ResponseEntity.ok(
                 userMapper.mapToUser(
                         userService.findUserEntityByLogin(
@@ -59,7 +65,7 @@ public class UserController {
     public ResponseEntity<HttpStatus> updateUserImage(@AuthenticationPrincipal UserDetails userDetails,
                                                       @RequestParam MultipartFile image) {
         userService.updateImage(userDetails, image);
-        System.out.println("User image upload method call"); // TODO LOG
+        logger.info("User image update method invoke");
         return ResponseEntity.ok(HttpStatus.OK);
     }
 }

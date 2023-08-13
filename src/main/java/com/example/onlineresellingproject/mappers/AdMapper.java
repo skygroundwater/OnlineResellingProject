@@ -50,7 +50,7 @@ public class AdMapper implements Mapper {
 
     public Ads mapToAds(List<AdEntity> adEntities) {
         return Ads.builder()
-                .ads(adEntities.stream()
+                .results(adEntities.stream()
                         .map(this::mapToAd)
                         .collect(Collectors.toList()))
                 .count(adEntities.size()).build();
