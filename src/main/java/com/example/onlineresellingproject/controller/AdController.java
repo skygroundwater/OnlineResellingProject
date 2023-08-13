@@ -13,8 +13,10 @@ import com.example.onlineresellingproject.service.CommentService;
 import com.example.onlineresellingproject.service.FilesService;
 import com.example.onlineresellingproject.service.UserService;
 import com.example.onlineresellingproject.service.impl.AdServiceImpl;
+import jdk.jfr.ContentType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -57,12 +59,12 @@ public class AdController {
         return ResponseEntity.ok(adService.getAds());
     }
 
-    @PostMapping
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Ad> addAd(@AuthenticationPrincipal UserDetails userDetails,
-                                    @RequestBody CreateOrUpdateAd ad,
-                                    @RequestParam MultipartFile multipartFile) {
+                                    @RequestPart CreateOrUpdateAd properties,
+                                    @RequestPart MultipartFile image) {
 
-        return ResponseEntity.ok(adService.createOrUpdate(userDetails, ad, multipartFile));
+        return ResponseEntity.ok(adService.createOrUpdate(userDetails, properties, image));
     }
 
     @GetMapping("/{id}")

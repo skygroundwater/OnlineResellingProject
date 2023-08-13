@@ -63,9 +63,11 @@ public class FilesServiceImpl implements FilesService {
     }
 
     @Override
-    public void saveAdsImage(MultipartFile file, String newFileName) {
-        File newFile = new File(adsImagesPath + File.separator + newFileName);
+    public String saveAdsImage(MultipartFile file, String newFileName) {
+        String filePathInStorage = adsImagesPath + File.separator + newFileName;
+        File newFile = new File(imagesPath + filePathInStorage);
         uploadFile(file, newFile);
+        return filePathInStorage;
     }
 
 

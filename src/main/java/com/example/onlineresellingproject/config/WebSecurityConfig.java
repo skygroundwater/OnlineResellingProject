@@ -30,7 +30,6 @@ public class WebSecurityConfig {
     private static final String[] AUTH_WHITELIST = {
             "/swagger-resources/**",
             "/swagger-ui.html",
-            "/images/users/*",
             "/v3/api-docs",
             "/webjars/**",
             "/login",
@@ -60,7 +59,7 @@ public class WebSecurityConfig {
                                 authorization
                                         .mvcMatchers(AUTH_WHITELIST)
                                         .permitAll()
-                                        .mvcMatchers("/images/ads/**", "/images/ads/users/**")
+                                        .mvcMatchers("/images/**")
                                         .authenticated())
                 .cors()
                 .and()
