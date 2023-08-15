@@ -58,24 +58,22 @@ public class FilesServiceImpl implements FilesService {
 
 
     @Override
-    public String saveUserImage(MultipartFile file, String newFileName) {
-        String filePathInStorage = usersImagesPath + File.separator + newFileName;
+    public String saveUserImage(MultipartFile file) {
+        String filePathInStorage = usersImagesPath + File.separator + getNewFileName(file);
         File newFile = new File(imagesPath + filePathInStorage);
         uploadFile(file, newFile);
         return filePathInStorage;
     }
 
     @Override
-    public String saveAdsImage(MultipartFile file, String newFileName) {
-        String filePathInStorage = adsImagesPath + File.separator + newFileName;
+    public String saveAdsImage(MultipartFile file) {
+        String filePathInStorage = adsImagesPath + File.separator + getNewFileName(file);
         File newFile = new File(imagesPath + filePathInStorage);
         uploadFile(file, newFile);
         return filePathInStorage;
     }
 
-
-    @Override
-    public String getNewFileName(MultipartFile file) {
+    private String getNewFileName(MultipartFile file) {
         String[] split = Objects.requireNonNull(file.getOriginalFilename()).split("\\.");
         String extension = split[split.length - 1];
         return UUID.randomUUID() + "." + extension;

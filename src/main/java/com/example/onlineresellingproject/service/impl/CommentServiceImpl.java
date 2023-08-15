@@ -1,17 +1,19 @@
 package com.example.onlineresellingproject.service.impl;
 
+import com.example.onlineresellingproject.dto.comment.Comment;
+import com.example.onlineresellingproject.dto.comment.Comments;
 import com.example.onlineresellingproject.dto.comment.CreateOrUpdateComment;
+import com.example.onlineresellingproject.entity.AdEntity;
 import com.example.onlineresellingproject.entity.CommentEntity;
+import com.example.onlineresellingproject.entity.UserEntity;
 import com.example.onlineresellingproject.exceptions.NotFoundInDataBaseException;
 import com.example.onlineresellingproject.exceptions.NotValidDataException;
 import com.example.onlineresellingproject.exceptions.NotValidModelException;
+import com.example.onlineresellingproject.mappers.CommentMapper;
 import com.example.onlineresellingproject.repository.CommentEntityRepo;
 import com.example.onlineresellingproject.service.CommentService;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -19,7 +21,7 @@ public class CommentServiceImpl implements CommentService {
 
     private final CommentEntityRepo repository;
 
-    private final ModelMapper modelMapper;
+    private final CommentMapper commentMapper;
 
     @Override
     public final CommentEntity post(CommentEntity model) {
@@ -50,17 +52,22 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public CreateOrUpdateComment createOrUpdate(Long key, CreateOrUpdateComment dto) {
-        CommentEntity commentEntity = get(key);
-        if (commentEntity != null) {
-            commentEntity.setText(dto.getText());
-            post(commentEntity);
-            return dto;
-        } else throw new NotFoundInDataBaseException("Комментарий не был найден");
+    public Comment create(UserEntity user, AdEntity adEntity, CreateOrUpdateComment createOrUpdateComment) {
+        return commentMapper.mapToComment(
+                post(
+                        new CommentEntity().setFieldsAndReturnEntity(user, adEntity, createOrUpdateComment)));
     }
 
     @Override
-    public List<CommentEntity> findCommentsByAdId(Long id) {
-        return repository.findAllByAd_Id(id);
+    public Comment update(Long id, CreateOrUpdateComment dto) {
+        return commentMapper.mapToComment(
+                patch(
+                        get(id).setFieldsAndReturnEntity(dto)));
+    }
+
+    @Override
+    public Comments findCommentsByAdId(Long id) {
+        return commentMapper.mapToComments(
+                repository.findAllByAd_Id(id));
     }
 }

@@ -1,7 +1,11 @@
 package com.example.onlineresellingproject.service;
 
+import com.example.onlineresellingproject.dto.comment.Comment;
+import com.example.onlineresellingproject.dto.comment.Comments;
 import com.example.onlineresellingproject.dto.comment.CreateOrUpdateComment;
+import com.example.onlineresellingproject.entity.AdEntity;
 import com.example.onlineresellingproject.entity.CommentEntity;
+import com.example.onlineresellingproject.entity.UserEntity;
 
 import java.util.List;
 
@@ -15,8 +19,10 @@ public interface CommentService {
 
     CommentEntity get(Long id);
 
-    CreateOrUpdateComment createOrUpdate(Long key, CreateOrUpdateComment dto);
+    Comment create(UserEntity user, AdEntity adEntity, CreateOrUpdateComment dto);
 
-    List<CommentEntity> findCommentsByAdId(Long id);
+    Comment update(Long id, CreateOrUpdateComment dto);
+
+    Comments findCommentsByAdId(Long id);
 
 }

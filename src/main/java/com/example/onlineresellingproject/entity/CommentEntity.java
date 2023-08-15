@@ -1,5 +1,7 @@
 package com.example.onlineresellingproject.entity;
 
+import com.example.onlineresellingproject.dto.ad.CreateOrUpdateAd;
+import com.example.onlineresellingproject.dto.comment.CreateOrUpdateComment;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -26,11 +28,11 @@ public class CommentEntity extends ProjectEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(referencedColumnName = "id", name = "user")
+    @JoinColumn(referencedColumnName = "id")
     private UserEntity user;
 
     @ManyToOne
-    @JoinColumn(referencedColumnName = "id", name = "ad")
+    @JoinColumn(referencedColumnName = "id")
     private AdEntity ad;
 
     @Column(name = "created_at")
@@ -38,4 +40,19 @@ public class CommentEntity extends ProjectEntity {
 
     @Column(name = "text")
     private String text;
+
+    public final CommentEntity setFieldsAndReturnEntity(CreateOrUpdateComment createOrUpdateComment) {
+        this.setText(createOrUpdateComment.getText());
+        return this;
+    }
+
+    public final CommentEntity setFieldsAndReturnEntity(
+            UserEntity user, AdEntity adEntity, CreateOrUpdateComment createOrUpdateComment) {
+        this.setText(createOrUpdateComment.getText());
+        this.setUser(user);
+        this.setAd(adEntity);
+        this.setCreatedAt(LocalDateTime.now());
+        return this;
+    }
+
 }

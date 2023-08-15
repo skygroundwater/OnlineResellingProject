@@ -21,5 +21,4 @@ public class MultipartConfig {
         factory.setMaxRequestSize(DataSize.parse("5000KB"));
         return factory.createMultipartConfig();
     }
-
 }
