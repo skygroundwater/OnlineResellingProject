@@ -25,4 +25,5 @@ public interface UserService extends UserDetailsService {
 
     UserEntity updateUserPassword(NewPassword newPassword, UserDetails userDetails);
 
+    User getUser(UserDetails userDetails);
 }

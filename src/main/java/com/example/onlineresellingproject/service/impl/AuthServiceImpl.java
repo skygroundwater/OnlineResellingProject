@@ -4,31 +4,29 @@ import com.example.onlineresellingproject.dto.user.Register;
 import com.example.onlineresellingproject.entity.UserEntity;
 import com.example.onlineresellingproject.service.AuthService;
 import com.example.onlineresellingproject.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.nio.CharBuffer;
+import java.time.LocalDateTime;
 
 @Service
-public class  AuthServiceImpl implements AuthService {
+@RequiredArgsConstructor
+public class AuthServiceImpl implements AuthService {
 
     private final UserService userService;
-    private final PasswordEncoder encoder;
 
-    public AuthServiceImpl(UserService userService,
-                           PasswordEncoder passwordEncoder) {
-        this.userService = userService;
-        this.encoder = passwordEncoder;
-    }
+    private final PasswordEncoder encoder;
 
     @Override
     public boolean login(String userName, char[] password) {
         if (!userService.userExists(userName)) {
             return false;
         }
-        UserDetails userDetails = userService.loadUserByUsername(userName);
-        return encoder.matches(CharBuffer.wrap(password), userDetails.getPassword());
+        return encoder.matches(CharBuffer.wrap(password),
+                userService.loadUserByUsername(userName).getPassword());
     }
 
     @Override
@@ -44,6 +42,11 @@ public class  AuthServiceImpl implements AuthService {
                         .lastName(register.getLastName())
                         .phone(register.getPhone())
                         .role(register.getRole())
+                        .isEnabled(true)
+                        .nonLocked(true)
+                        .nonExpired(true)
+                        .nonCredentialsExpired(true)
+                        .registrationDate(LocalDateTime.now())
                         .build());
         return true;
     }

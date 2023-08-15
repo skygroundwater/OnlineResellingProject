@@ -3,6 +3,7 @@ package com.example.onlineresellingproject.service;
 import com.example.onlineresellingproject.dto.ad.Ad;
 import com.example.onlineresellingproject.dto.ad.Ads;
 import com.example.onlineresellingproject.dto.ad.CreateOrUpdateAd;
+import com.example.onlineresellingproject.dto.ad.ExtendedAd;
 import com.example.onlineresellingproject.entity.AdEntity;
 import com.example.onlineresellingproject.entity.UserEntity;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,15 +23,15 @@ public interface AdService {
 
     Ads getAds();
 
-    Ad createOrUpdate(UserDetails userDetails,
-                      CreateOrUpdateAd dto,
-                      MultipartFile multipartFile);
+    Ad create(UserEntity userEntity,
+              CreateOrUpdateAd dto,
+              MultipartFile multipartFile);
 
-    AdEntity updateImage(Long id, UserDetails userDetails, MultipartFile multipartFile);
+    Ad updateImage(Long id, UserDetails userDetails, MultipartFile multipartFile);
 
-    AdEntity findAdEntityByTitle(String title);
+    Ads findUserAds(UserEntity userEntity);
 
-    List<AdEntity> findAllAdsByUser(UserEntity userEntity);
+    ExtendedAd getExtendedAd(Long id);
 
-    Ads findUsersAds(UserDetails userDetails);
+    Ad updateAd(Long id, CreateOrUpdateAd createOrUpdateAd);
 }

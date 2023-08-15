@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Builder
 public class Comment extends CommentDTO {
 //
 //    private Long id;

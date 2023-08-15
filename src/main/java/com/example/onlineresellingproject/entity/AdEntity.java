@@ -1,5 +1,6 @@
 package com.example.onlineresellingproject.entity;
 
+import com.example.onlineresellingproject.dto.ad.CreateOrUpdateAd;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,9 +11,9 @@ import java.util.List;
 @Table(name = "ads")
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class AdEntity extends ProjectEntity {
 
     @Id
@@ -40,4 +41,22 @@ public class AdEntity extends ProjectEntity {
 
     @Column(name = "description")
     private String description;
+
+    public final AdEntity setFieldsAndReturnEntity(UserEntity userEntity,
+                                                   CreateOrUpdateAd dto,
+                                                   String pathToImage) {
+        this.setUser(userEntity);
+        this.setDescription(dto.getDescription());
+        this.setPrice(dto.getPrice());
+        this.setTitle(dto.getTitle());
+        this.setImage(pathToImage);
+        return this;
+    }
+
+    public final AdEntity setFieldsAndReturnEntity(CreateOrUpdateAd createOrUpdateAd) {
+        this.setDescription(createOrUpdateAd.getDescription());
+        this.setTitle(createOrUpdateAd.getTitle());
+        this.setPrice(createOrUpdateAd.getPrice());
+        return this;
+    }
 }

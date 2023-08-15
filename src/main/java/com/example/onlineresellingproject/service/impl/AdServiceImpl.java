@@ -3,6 +3,7 @@ package com.example.onlineresellingproject.service.impl;
 import com.example.onlineresellingproject.dto.ad.Ad;
 import com.example.onlineresellingproject.dto.ad.Ads;
 import com.example.onlineresellingproject.dto.ad.CreateOrUpdateAd;
+import com.example.onlineresellingproject.dto.ad.ExtendedAd;
 import com.example.onlineresellingproject.entity.AdEntity;
 import com.example.onlineresellingproject.entity.UserEntity;
 import com.example.onlineresellingproject.exceptions.NotFoundInDataBaseException;
@@ -25,12 +26,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AdServiceImpl implements AdService {
 
-
     private final AdEntityRepo repository;
 
     private final AdMapper adMapper;
-
-    private final UserService userService;
 
     private final FilesService filesService;
 
@@ -73,40 +71,37 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
-    public Ad createOrUpdate(UserDetails userDetails,
-                             CreateOrUpdateAd dto,
-                             MultipartFile multipartFile) {
-        UserEntity userEntity = userService.findUserEntityByLogin(userDetails.getUsername());
-        AdEntity adEntity = new AdEntity();
-        adEntity.setUser(userEntity);
-        adEntity.setDescription(dto.getDescription());
-        adEntity.setPrice(dto.getPrice());
-        adEntity.setTitle(dto.getTitle());
-        adEntity.setImage(filesService.saveAdsImage(multipartFile, filesService.getNewFileName(multipartFile)));
-        return adMapper.mapToAd(post(adEntity));
+    public Ad create(UserEntity userEntity,
+                     CreateOrUpdateAd createOrUpdateAd,
+                     MultipartFile multipartFile) {
+        return adMapper.mapToAd(
+                post(new AdEntity()
+                        .setFieldsAndReturnEntity(userEntity, createOrUpdateAd,
+                                filesService.saveAdsImage(multipartFile))));
     }
 
     @Override
-    public AdEntity updateImage(Long id, UserDetails userDetails, MultipartFile multipartFile) {
+    public ExtendedAd getExtendedAd(Long id) {
+        return adMapper.mapToExtendedAd(get(id));
+    }
+
+    @Override
+    public Ad updateAd(Long id, CreateOrUpdateAd createOrUpdateAd) {
+        return adMapper.mapToAd(
+                patch(get(id)
+                        .setFieldsAndReturnEntity(createOrUpdateAd)));
+    }
+
+    @Override
+    public Ad updateImage(Long id, UserDetails userDetails, MultipartFile multipartFile) {
         AdEntity adEntity = get(id);
-        return adEntity;
+        adEntity.setImage(filesService.saveAdsImage(multipartFile));
+        return adMapper.mapToAd(adEntity);
     }
 
     @Override
-    public AdEntity findAdEntityByTitle(String title) {
-        return repository.findAdEntityByTitle(title)
-                .orElseThrow(() -> new NotFoundInDataBaseException("Объявление по названию не найдено"));
-    }
-
-    @Override
-    public List<AdEntity> findAllAdsByUser(UserEntity userEntity) {
-        return repository.findAdEntitiesByUser(userEntity);
-    }
-
-    @Override
-    public Ads findUsersAds(UserDetails userDetails) {
-        UserEntity userEntity = userService.findUserEntityByLogin(userDetails.getUsername());
-        List<AdEntity> adEntities = findAllAdsByUser(userEntity);
+    public Ads findUserAds(UserEntity userEntity) {
+        List<AdEntity> adEntities = repository.findAdEntitiesByUser(userEntity);
         return adMapper.mapToAds(adEntities);
     }
 }

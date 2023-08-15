@@ -2,6 +2,7 @@ package com.example.onlineresellingproject.service.impl;
 
 import com.example.onlineresellingproject.dto.user.NewPassword;
 import com.example.onlineresellingproject.dto.user.UpdateUser;
+import com.example.onlineresellingproject.dto.user.User;
 import com.example.onlineresellingproject.entity.UserEntity;
 import com.example.onlineresellingproject.entity.UserWrapper;
 import com.example.onlineresellingproject.exceptions.NotFoundInDataBaseException;
@@ -11,27 +12,23 @@ import com.example.onlineresellingproject.repository.UserEntityRepo;
 import com.example.onlineresellingproject.service.FilesService;
 import com.example.onlineresellingproject.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
-    private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private final PasswordEncoder passwordEncoder;
 
     private final UserMapper userMapper;
 
     private final FilesService filesService;
 
     private final UserEntityRepo repository;
-
-    private final ModelMapper modelMapper;
 
     @Override
     public final UserEntity post(UserEntity model) {
@@ -60,8 +57,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public UserEntity updateImage(UserDetails userDetails, MultipartFile multipartFile) {
         UserEntity userEntity = findUserEntityByLogin(userDetails.getUsername());
-        String newFileName = filesService.getNewFileName(multipartFile);
-        userEntity.setImage(filesService.saveUserImage(multipartFile, newFileName));
+        userEntity.setImage(filesService.saveUserImage(multipartFile));
         return patch(userEntity);
     }
 
@@ -82,6 +78,13 @@ public class UserServiceImpl implements UserService{
         userEntity.setPassword(passwordEncoder.encode(newPassword.getNewPassword()));
         post(userEntity);
         return userEntity;
+    }
+
+    @Override
+    public User getUser(UserDetails userDetails) {
+        return userMapper.mapToUser(
+                findUserEntityByLogin(
+                        userDetails.getUsername()));
     }
 
     @Override

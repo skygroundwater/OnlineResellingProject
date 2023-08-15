@@ -1,0 +1,3 @@
+databaseChangeLog:
+  - include:
+      file: liquibase/psql_database_script.sql
