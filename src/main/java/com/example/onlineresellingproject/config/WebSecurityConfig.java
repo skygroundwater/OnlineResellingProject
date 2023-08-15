@@ -28,6 +28,7 @@ public class WebSecurityConfig {
             "/swagger-ui.html",
             "/v3/api-docs",
             "/images/**",
+            "/ads",
             "/webjars/**",
             "/login",
             "/register"
@@ -56,7 +57,7 @@ public class WebSecurityConfig {
                                 authorization
                                         .mvcMatchers(AUTH_WHITELIST)
                                         .permitAll()
-                                        .mvcMatchers()
+                                        .mvcMatchers("/ads/**", "/users/**")
                                         .authenticated())
                 .cors()
                 .and()
