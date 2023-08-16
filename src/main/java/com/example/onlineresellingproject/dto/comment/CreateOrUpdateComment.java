@@ -1,7 +1,5 @@
 package com.example.onlineresellingproject.dto.comment;
 
-import com.example.onlineresellingproject.dto.ad.CreateOrUpdateAd;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

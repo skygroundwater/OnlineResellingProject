@@ -1,6 +1,9 @@
 package com.example.onlineresellingproject.dto.ad;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @EqualsAndHashCode(callSuper = true)
 @Data

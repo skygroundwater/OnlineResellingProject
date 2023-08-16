@@ -13,7 +13,6 @@ import com.example.onlineresellingproject.mappers.AdMapper;
 import com.example.onlineresellingproject.repository.AdEntityRepo;
 import com.example.onlineresellingproject.service.AdService;
 import com.example.onlineresellingproject.service.FilesService;
-import com.example.onlineresellingproject.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;

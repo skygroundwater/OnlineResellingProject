@@ -7,8 +7,6 @@ import com.example.onlineresellingproject.entity.AdEntity;
 import com.example.onlineresellingproject.entity.CommentEntity;
 import com.example.onlineresellingproject.entity.UserEntity;
 
-import java.util.List;
-
 public interface CommentService {
 
     CommentEntity post(CommentEntity model);

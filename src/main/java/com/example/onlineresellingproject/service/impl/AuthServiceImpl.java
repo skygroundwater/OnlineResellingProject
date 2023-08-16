@@ -5,7 +5,6 @@ import com.example.onlineresellingproject.entity.UserEntity;
 import com.example.onlineresellingproject.service.AuthService;
 import com.example.onlineresellingproject.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

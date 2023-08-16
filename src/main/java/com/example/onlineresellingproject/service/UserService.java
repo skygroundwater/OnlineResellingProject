@@ -1,6 +1,5 @@
 package com.example.onlineresellingproject.service;
 
-import com.example.onlineresellingproject.dto.ad.Ads;
 import com.example.onlineresellingproject.dto.user.NewPassword;
 import com.example.onlineresellingproject.dto.user.UpdateUser;
 import com.example.onlineresellingproject.dto.user.User;
