@@ -9,6 +9,12 @@ public class UserMapper implements Mapper {
 
     public User mapToUser(UserEntity userEntity) {
         Integer id = Math.toIntExact(userEntity.getId());
-        return new User(id, userEntity.getUsername(), userEntity.getFirstName(), userEntity.getLastName(), userEntity.getPhone(), userEntity.getRole().name(), userEntity.getImage());
+        return new User(id,
+                userEntity.getUsername(),
+                userEntity.getFirstName(),
+                userEntity.getLastName(),
+                userEntity.getPhone(),
+                userEntity.getRole().name(),
+                userEntity.getImage());
     }
 }

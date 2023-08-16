@@ -1,8 +1,11 @@
 package com.example.onlineresellingproject.entity;
 
-import com.example.onlineresellingproject.dto.ad.CreateOrUpdateAd;
 import com.example.onlineresellingproject.dto.comment.CreateOrUpdateComment;
-import lombok.*;
+import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
