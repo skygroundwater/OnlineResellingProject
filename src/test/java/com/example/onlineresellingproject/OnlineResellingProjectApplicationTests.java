@@ -1,10 +1,11 @@
 package com.example.onlineresellingproject;
 
-import org.junit.jupiter.api.Test;
+
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class OnlineResellingProjectApplicationTests {
+class  OnlineResellingProjectApplicationTests {
 
     @Test
     void contextLoads() {

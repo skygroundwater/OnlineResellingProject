@@ -1,29 +1,27 @@
 package com.example.onlineresellingproject.dto.ad;
 
-import com.example.onlineresellingproject.entity.AdEntity;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.modelmapper.ModelMapper;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
 public class ExtendedAd extends AdDTO {
 
-    private Long id;
+    private Integer pk;
 
-    private String userFirstName;
+    private String authorFirstName;
 
-    private String userLastName;
+    private String authorLastName;
 
     private String description;
 
-    private String userEmail;
+    private String email;
 
     private String image;
 
-    private String userPhone;
+    private String phone;
 
     private Integer price;
 

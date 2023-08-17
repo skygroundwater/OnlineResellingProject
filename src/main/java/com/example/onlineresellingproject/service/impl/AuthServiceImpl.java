@@ -1,45 +1,51 @@
 package com.example.onlineresellingproject.service.impl;
 
 import com.example.onlineresellingproject.dto.user.Register;
+import com.example.onlineresellingproject.entity.UserEntity;
 import com.example.onlineresellingproject.service.AuthService;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
+import com.example.onlineresellingproject.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 
+import java.nio.CharBuffer;
+import java.time.LocalDateTime;
+
 @Service
+@RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
-    private final UserDetailsManager manager;
+    private final UserService userService;
+
     private final PasswordEncoder encoder;
 
-    public AuthServiceImpl(UserDetailsManager manager,
-                           PasswordEncoder passwordEncoder) {
-        this.manager = manager;
-        this.encoder = passwordEncoder;
-    }
-
     @Override
-    public boolean login(String userName, String password) {
-        if (!manager.userExists(userName)) {
+    public boolean login(String userName, char[] password) {
+        if (!userService.userExists(userName)) {
             return false;
         }
-        UserDetails userDetails = manager.loadUserByUsername(userName);
-        return encoder.matches(password, userDetails.getPassword());
+        return encoder.matches(CharBuffer.wrap(password),
+                userService.loadUserByUsername(userName).getPassword());
     }
 
     @Override
     public boolean register(Register register) {
-        if (manager.userExists(register.getUsername())) {
+        if (userService.userExists(register.getUsername())) {
             return false;
         }
-        manager.createUser(
-                User.builder()
-                        .passwordEncoder(this.encoder::encode)
-                        .password(register.getPassword())
+        userService.post(
+                UserEntity.builder()
+                        .password(encoder.encode(CharBuffer.wrap(register.getPassword())))
                         .username(register.getUsername())
-                        .roles(register.getRole().name())
+                        .firstName(register.getFirstName())
+                        .lastName(register.getLastName())
+                        .phone(register.getPhone())
+                        .role(register.getRole())
+                        .isEnabled(true)
+                        .nonLocked(true)
+                        .nonExpired(true)
+                        .nonCredentialsExpired(true)
+                        .registrationDate(LocalDateTime.now())
                         .build());
         return true;
     }

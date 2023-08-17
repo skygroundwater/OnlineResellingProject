@@ -1,6 +1,9 @@
 package com.example.onlineresellingproject.dto.ad;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -8,16 +11,14 @@ import lombok.*;
 @NoArgsConstructor
 public class Ad extends AdDTO {
 
-    private Long id;
+    private Integer pk;
 
-    private Long userId;
+    private Integer author;
 
     private String image;
 
     private Integer price;
 
     private String title;
-
-    private String description;
 
 }

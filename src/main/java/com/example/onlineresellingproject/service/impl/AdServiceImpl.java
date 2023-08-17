@@ -1,33 +1,106 @@
 package com.example.onlineresellingproject.service.impl;
 
+import com.example.onlineresellingproject.dto.ad.Ad;
+import com.example.onlineresellingproject.dto.ad.Ads;
 import com.example.onlineresellingproject.dto.ad.CreateOrUpdateAd;
+import com.example.onlineresellingproject.dto.ad.ExtendedAd;
 import com.example.onlineresellingproject.entity.AdEntity;
+import com.example.onlineresellingproject.entity.UserEntity;
+import com.example.onlineresellingproject.exceptions.NotFoundInDataBaseException;
+import com.example.onlineresellingproject.exceptions.NotValidDataException;
+import com.example.onlineresellingproject.exceptions.NotValidModelException;
+import com.example.onlineresellingproject.mappers.AdMapper;
 import com.example.onlineresellingproject.repository.AdEntityRepo;
 import com.example.onlineresellingproject.service.AdService;
-import org.modelmapper.ModelMapper;
+import com.example.onlineresellingproject.service.FilesService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
-public class AdServiceImpl extends AbstractService<AdEntity, Long, AdEntityRepo, CreateOrUpdateAd> implements AdService {
-    AdServiceImpl(AdEntityRepo repository,
-                  ModelMapper modelMapper) {
-        super(repository, modelMapper);
+@RequiredArgsConstructor
+public class AdServiceImpl implements AdService {
+
+    private final AdEntityRepo repository;
+
+    private final AdMapper adMapper;
+
+    private final FilesService filesService;
+
+    @Override
+    public final AdEntity post(AdEntity model) {
+        if (model != null) {
+            return repository.save(model);
+        } else throw new NotValidModelException();
     }
 
     @Override
-    public CreateOrUpdateAd createOrUpdate(Long key, CreateOrUpdateAd dto) {
-        AdEntity adEntity = get(key);
-        adEntity.setTitle(dto.getTitle());
-        adEntity.setPrice(dto.getPrice());
-        adEntity.setDescription(dto.getDescription());
-        post(adEntity);
-        return dto;
+    public final AdEntity patch(AdEntity model) {
+        if (model != null) {
+            return repository.save(model);
+        } else throw new NotValidModelException();
     }
 
     @Override
-    public AdEntity updateImage(Long id, MultipartFile multipartFile) {
+    public final void delete(Long id) {
+        if (id != null) {
+            repository.deleteById(id);
+        } else throw new NotValidDataException();
+    }
+
+    @Override
+    public final AdEntity get(Long id) {
+        if (id != null) {
+            return repository.findById(id).orElseThrow(NotFoundInDataBaseException::new);
+        } else throw new NotValidDataException();
+    }
+
+    @Override
+    public final Ads getAds() {
+        List<AdEntity> entities = repository.findAll();
+        return Ads.builder()
+                .results(entities.stream()
+                        .map(adMapper::mapToAd)
+                        .collect(Collectors.toList()))
+                .count(entities.size()).build();
+    }
+
+    @Override
+    public Ad create(UserEntity userEntity,
+                     CreateOrUpdateAd createOrUpdateAd,
+                     MultipartFile multipartFile) {
+        return adMapper.mapToAd(
+                post(new AdEntity()
+                        .setFieldsAndReturnEntity(userEntity, createOrUpdateAd,
+                                filesService.saveAdsImage(multipartFile))));
+    }
+
+    @Override
+    public ExtendedAd getExtendedAd(Long id) {
+        return adMapper.mapToExtendedAd(get(id));
+    }
+
+    @Override
+    public Ad updateAd(Long id, CreateOrUpdateAd createOrUpdateAd) {
+        return adMapper.mapToAd(
+                patch(get(id)
+                        .setFieldsAndReturnEntity(createOrUpdateAd)));
+    }
+
+    @Override
+    public Ad updateImage(Long id, UserDetails userDetails, MultipartFile multipartFile) {
         AdEntity adEntity = get(id);
-        return processImage(id, adEntity, multipartFile, "path/to/file/holder");
+        adEntity.setImage(filesService.saveAdsImage(multipartFile));
+        return adMapper.mapToAd(adEntity);
+    }
+
+    @Override
+    public Ads findUserAds(UserEntity userEntity) {
+        List<AdEntity> adEntities = repository.findAdEntitiesByUser(userEntity);
+        return adMapper.mapToAds(adEntities);
     }
 }

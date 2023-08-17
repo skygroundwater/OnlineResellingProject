@@ -15,5 +15,4 @@ public class NotFoundInDataBaseException extends RuntimeException {
     public NotFoundInDataBaseException(ProjectEntity model){
         super("Модель класса " + model.getClass().getSimpleName() + " не найдена в базе");
     }
-
 }

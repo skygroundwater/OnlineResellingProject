@@ -1,3 +1,7 @@
+-- liquibase formatted sql
+
+-- changeset skygroundwater:1
+
 create table users
 (
     id                      bigserial
@@ -19,6 +23,9 @@ create table users
 
 alter table users
     owner to postgres;
+
+create index users_username_index
+    on users (username);
 
 create table ads
 (
@@ -43,10 +50,10 @@ create table comments
     id         bigserial
         constraint comments_pk
             primary key,
-    "user"     bigint
+    user_id    bigint
         constraint comments_users_id_fk
             references users,
-    ad         bigint
+    ad_id      bigint
         constraint comments_ads_id_fk
             references ads,
     created_at timestamp,
@@ -55,4 +62,3 @@ create table comments
 
 alter table comments
     owner to postgres;
-
