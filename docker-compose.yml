@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+
+  frontend:
+    image: ghcr.io/bizinmitya/front-react-avito:v1.19
+    container_name: online_reselling_project_frontend
+    ports:
+      - 3000:3000
+
+  postgres:
+    image: postgres:15
+    container_name: online_reselling_project_database
+    ports:
+      - 6543:5432
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: database_name2
+      POSTGRES_PASSWORD: Tilitilitatata12345
+
+  backend:
+    build: ./
+    container_name: online_reselling_project_backend
+    ports:
+        - 8080:8080
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: Tilitilitatata12345
