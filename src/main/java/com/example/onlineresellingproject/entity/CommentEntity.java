@@ -57,5 +57,4 @@ public class CommentEntity extends ProjectEntity {
         this.setCreatedAt(LocalDateTime.now());
         return this;
     }
-
 }
