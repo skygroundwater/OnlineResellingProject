@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
@@ -57,9 +57,12 @@ public class UserController {
             }
     )
     @PostMapping("/set_password")
-    public ResponseEntity<HttpStatus> setPassword(@AuthenticationPrincipal UserDetails userDetails,
-                                                  @RequestBody NewPassword newPassword) {
-        userService.updateUserPassword(newPassword, userDetails);
+    public ResponseEntity<HttpStatus> setPassword(@RequestBody NewPassword newPassword) {
+        userService.updateUserPassword(newPassword, (UserDetails)
+                SecurityContextHolder
+                        .getContext()
+                        .getAuthentication()
+                        .getPrincipal());
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
@@ -81,9 +84,13 @@ public class UserController {
             }
     )
     @GetMapping("/me")
-    public ResponseEntity<User> getUser(@AuthenticationPrincipal UserDetails userDetails) {
+    public ResponseEntity<User> getUser() {
         return ResponseEntity.ok(
-                userService.getUser(userDetails));
+                userService.getUser((UserDetails)
+                        SecurityContextHolder
+                                .getContext()
+                                .getAuthentication()
+                                .getPrincipal()));
     }
 
     @Operation(
@@ -104,11 +111,14 @@ public class UserController {
             }
     )
     @PatchMapping("/me")
-    public ResponseEntity<UpdateUser> updateUser(@AuthenticationPrincipal UserDetails userDetails,
-                                                 @RequestBody UpdateUser updateUser) {
+    public ResponseEntity<UpdateUser> updateUser(@RequestBody UpdateUser updateUser) {
         return ResponseEntity.ok(
                 userService.createOrUpdate(
-                        userDetails, updateUser));
+                        (UserDetails)
+                                SecurityContextHolder
+                                        .getContext()
+                                        .getAuthentication()
+                                        .getPrincipal(), updateUser));
     }
 
     @Operation(
@@ -129,9 +139,14 @@ public class UserController {
             }
     )
     @PatchMapping(value = "/me/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<HttpStatus> updateUserImage(@AuthenticationPrincipal UserDetails userDetails,
-                                                      @RequestParam MultipartFile image) {
-        userService.updateImage(userDetails, image);
+    public ResponseEntity<HttpStatus> updateUserImage(@RequestParam MultipartFile image) {
+        userService.updateImage(
+                (UserDetails)
+                        SecurityContextHolder
+                                .getContext()
+                                .getAuthentication()
+                                .getPrincipal(),
+                image);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 }

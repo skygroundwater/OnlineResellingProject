@@ -23,6 +23,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextHolderStrategy;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -90,9 +92,11 @@ public class AdController {
             }
     )
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Ad> addAd(@AuthenticationPrincipal UserDetails userDetails,
-                                    @RequestPart CreateOrUpdateAd properties,
+    public ResponseEntity<Ad> addAd(@RequestPart CreateOrUpdateAd properties,
                                     @RequestPart MultipartFile image) {
+
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         return ResponseEntity.ok(
                 adService.create(
                         userService.findUserEntityByLogin(userDetails.getUsername()),
@@ -216,7 +220,8 @@ public class AdController {
             }
     )
     @GetMapping("/me")
-    public ResponseEntity<Ads> getAdsMe(@AuthenticationPrincipal UserDetails userDetails) {
+    public ResponseEntity<Ads> getAdsMe() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return ResponseEntity.ok(
                 adService.findUserAds(
                         userService.findUserEntityByLogin(userDetails.getUsername()))
@@ -250,10 +255,9 @@ public class AdController {
     )
     // TODO: 15.08.2023 зарефакторить метод, перенести реализацию в сервис объявлений
     @PatchMapping("/{id}/image")
-    public ResponseEntity<Ad> updateImage(@AuthenticationPrincipal UserDetails userDetails,
-                                          @PathVariable Long id,
+    public ResponseEntity<Ad> updateImage(@PathVariable Long id,
                                           @RequestParam MultipartFile multipartFile) {
-
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return ResponseEntity.ok(adService.updateImage(id, userDetails, multipartFile));
 
     }
@@ -308,9 +312,10 @@ public class AdController {
             }
     )
     @PostMapping("/{id}/comments")
-    public ResponseEntity<Comment> addComment(@AuthenticationPrincipal UserDetails userDetails,
-                                              @PathVariable Long id,
+    public ResponseEntity<Comment> addComment(@PathVariable Long id,
                                               @RequestBody CreateOrUpdateComment createOrUpdateComment) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         return ResponseEntity.ok(
                 commentService.create(
                         userService.findUserEntityByLogin(userDetails.getUsername()),
