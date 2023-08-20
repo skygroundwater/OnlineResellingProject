@@ -22,19 +22,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @Tag(name = "Объявления", description = "Контроллер для манипуляции с объявлениями")
@@ -90,9 +82,12 @@ public class AdController {
             }
     )
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Ad> addAd(@AuthenticationPrincipal UserDetails userDetails,
-                                    @RequestPart CreateOrUpdateAd properties,
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    public ResponseEntity<Ad> addAd(@RequestPart CreateOrUpdateAd properties,
                                     @RequestPart MultipartFile image) {
+
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         return ResponseEntity.ok(
                 adService.create(
                         userService.findUserEntityByLogin(userDetails.getUsername()),
@@ -119,6 +114,7 @@ public class AdController {
 
     )
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public ResponseEntity<ExtendedAd> getAd(@PathVariable Long id) {
         return ResponseEntity.ok(
                 adService.getExtendedAd(id)
@@ -152,8 +148,10 @@ public class AdController {
 
     )
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public ResponseEntity<HttpStatus> removeAd(@PathVariable Long id) {
-        adService.delete(id);
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        adService.deleteAd(userService.findUserEntityByLogin(userDetails.getUsername()), id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
@@ -183,6 +181,7 @@ public class AdController {
             }
     )
     @PatchMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public ResponseEntity<Ad> updateAds(@PathVariable Long id,
                                         @RequestBody CreateOrUpdateAd createOrUpdateAd) {
         return ResponseEntity.ok(
@@ -216,7 +215,9 @@ public class AdController {
             }
     )
     @GetMapping("/me")
-    public ResponseEntity<Ads> getAdsMe(@AuthenticationPrincipal UserDetails userDetails) {
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    public ResponseEntity<Ads> getAdsMe() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return ResponseEntity.ok(
                 adService.findUserAds(
                         userService.findUserEntityByLogin(userDetails.getUsername()))
@@ -250,10 +251,10 @@ public class AdController {
     )
     // TODO: 15.08.2023 зарефакторить метод, перенести реализацию в сервис объявлений
     @PatchMapping("/{id}/image")
-    public ResponseEntity<Ad> updateImage(@AuthenticationPrincipal UserDetails userDetails,
-                                          @PathVariable Long id,
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    public ResponseEntity<Ad> updateImage(@PathVariable Long id,
                                           @RequestParam MultipartFile multipartFile) {
-
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return ResponseEntity.ok(adService.updateImage(id, userDetails, multipartFile));
 
     }
@@ -280,6 +281,7 @@ public class AdController {
             }
     )
     @GetMapping("/{id}/comments")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public ResponseEntity<Comments> getComments(@PathVariable Long id) {
         return ResponseEntity.ok(
                 commentService.findCommentsByAdId(id)
@@ -308,9 +310,11 @@ public class AdController {
             }
     )
     @PostMapping("/{id}/comments")
-    public ResponseEntity<Comment> addComment(@AuthenticationPrincipal UserDetails userDetails,
-                                              @PathVariable Long id,
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    public ResponseEntity<Comment> addComment(@PathVariable Long id,
                                               @RequestBody CreateOrUpdateComment createOrUpdateComment) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         return ResponseEntity.ok(
                 commentService.create(
                         userService.findUserEntityByLogin(userDetails.getUsername()),
@@ -340,6 +344,7 @@ public class AdController {
             }
     )
     @DeleteMapping("/{adId}/comments/{commentId}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public ResponseEntity<HttpStatus> deleteComment(@PathVariable Long adId,
                                                     @PathVariable Long commentId) {
         commentService.delete(commentId);
@@ -372,6 +377,7 @@ public class AdController {
             }
     )
     @PatchMapping("/{adId}/comments/{commentId}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public ResponseEntity<Comment> updateComment(@PathVariable Long adId,
                                                  @PathVariable Long commentId,
                                                  @RequestBody CreateOrUpdateComment createOrUpdateComment) {

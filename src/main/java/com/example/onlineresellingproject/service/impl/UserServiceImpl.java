@@ -8,6 +8,8 @@ import com.example.onlineresellingproject.entity.UserWrapper;
 import com.example.onlineresellingproject.exceptions.NotFoundInDataBaseException;
 import com.example.onlineresellingproject.exceptions.NotValidModelException;
 import com.example.onlineresellingproject.mappers.UserMapper;
+import com.example.onlineresellingproject.microservicemsg.localservices.MicroServiceInterface;
+import com.example.onlineresellingproject.microservicemsg.messages.StatisticMicroServiceMessage;
 import com.example.onlineresellingproject.repository.UserEntityRepo;
 import com.example.onlineresellingproject.service.FilesService;
 import com.example.onlineresellingproject.service.UserService;
@@ -30,6 +32,8 @@ public class UserServiceImpl implements UserService {
 
     private final UserEntityRepo repository;
 
+    private final MicroServiceInterface<StatisticMicroServiceMessage> statisticMicroService;
+
     @Override
     public final UserEntity post(UserEntity model) {
         if (model != null) {
@@ -51,6 +55,7 @@ public class UserServiceImpl implements UserService {
         userEntity.setLastName(updateUser.getLastName());
         userEntity.setPhone(updateUser.getPhone());
         patch(userEntity);
+        statisticMicroService.send(new StatisticMicroServiceMessage(userEntity));
         return updateUser;
     }
 
@@ -58,6 +63,7 @@ public class UserServiceImpl implements UserService {
     public UserEntity updateImage(UserDetails userDetails, MultipartFile multipartFile) {
         UserEntity userEntity = findUserEntityByLogin(userDetails.getUsername());
         userEntity.setImage(filesService.saveUserImage(multipartFile));
+        statisticMicroService.send(new StatisticMicroServiceMessage(userEntity));
         return patch(userEntity);
     }
 
@@ -77,6 +83,7 @@ public class UserServiceImpl implements UserService {
         UserEntity userEntity = findUserEntityByLogin(userDetails.getUsername());
         userEntity.setPassword(passwordEncoder.encode(newPassword.getNewPassword()));
         post(userEntity);
+        statisticMicroService.send(new StatisticMicroServiceMessage(userEntity));
         return userEntity;
     }
 
