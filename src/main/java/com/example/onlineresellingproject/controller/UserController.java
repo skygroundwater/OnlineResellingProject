@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -57,6 +58,7 @@ public class UserController {
             }
     )
     @PostMapping("/set_password")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public ResponseEntity<HttpStatus> setPassword(@RequestBody NewPassword newPassword) {
         userService.updateUserPassword(newPassword, (UserDetails)
                 SecurityContextHolder
@@ -84,6 +86,7 @@ public class UserController {
             }
     )
     @GetMapping("/me")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public ResponseEntity<User> getUser() {
         return ResponseEntity.ok(
                 userService.getUser((UserDetails)
@@ -111,6 +114,7 @@ public class UserController {
             }
     )
     @PatchMapping("/me")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public ResponseEntity<UpdateUser> updateUser(@RequestBody UpdateUser updateUser) {
         return ResponseEntity.ok(
                 userService.createOrUpdate(
@@ -139,6 +143,7 @@ public class UserController {
             }
     )
     @PatchMapping(value = "/me/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public ResponseEntity<HttpStatus> updateUserImage(@RequestParam MultipartFile image) {
         userService.updateImage(
                 (UserDetails)
