@@ -29,6 +29,8 @@ public interface AdService {
 
     Ads findUserAds(UserEntity userEntity);
 
+    void deleteAd(UserEntity userEntity, Long id);
+
     ExtendedAd getExtendedAd(Long id);
 
     Ad updateAd(Long id, CreateOrUpdateAd createOrUpdateAd);
