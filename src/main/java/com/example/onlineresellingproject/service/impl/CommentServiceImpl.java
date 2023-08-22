@@ -13,11 +13,15 @@ import com.example.onlineresellingproject.mappers.CommentMapper;
 import com.example.onlineresellingproject.repository.CommentEntityRepo;
 import com.example.onlineresellingproject.service.CommentService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class CommentServiceImpl implements CommentService {
+
+    private final Logger logger = LoggerFactory.getLogger(CommentServiceImpl.class);
 
     private final CommentEntityRepo repository;
 
@@ -26,29 +30,44 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public final CommentEntity post(CommentEntity model) {
         if (model != null) {
+            logger.debug("Comment posted, {}", model.getText());
             return repository.save(model);
-        } else throw new NotValidModelException();
+        } else {
+            logger.error("Comment not valid");
+            throw new NotValidModelException();
+        }
     }
 
     @Override
     public final CommentEntity patch(CommentEntity model) {
         if (model != null) {
+            logger.debug("Comment patched, {}", model.getText());
             return repository.save(model);
-        } else throw new NotValidModelException();
+        } else {
+            logger.error("Comment not valid");
+            throw new NotValidModelException();
+        }
     }
 
     @Override
     public final void delete(Long id) {
         if (id != null) {
+            logger.debug("Comment deleted, {}", id);
             repository.deleteById(id);
-        } else throw new NotValidDataException();
+        } else {
+            logger.error("Comment not valid");
+            throw new NotValidDataException();
+        }
     }
 
     @Override
     public final CommentEntity get(Long id) {
         if (id != null) {
             return repository.findById(id).orElseThrow(NotFoundInDataBaseException::new);
-        } else throw new NotValidDataException();
+        } else {
+            logger.error("Comment not valid");
+            throw new NotValidDataException();
+        }
     }
 
     @Override

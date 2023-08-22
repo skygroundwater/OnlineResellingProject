@@ -5,6 +5,8 @@ import com.example.onlineresellingproject.entity.UserEntity;
 import com.example.onlineresellingproject.service.AuthService;
 import com.example.onlineresellingproject.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,8 @@ import java.time.LocalDateTime;
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
+
+    private final Logger logger = LoggerFactory.getLogger(AuthServiceImpl.class);
 
     private final UserService userService;
 
@@ -47,6 +51,7 @@ public class AuthServiceImpl implements AuthService {
                         .nonCredentialsExpired(true)
                         .registrationDate(LocalDateTime.now())
                         .build());
+        logger.info("New user has registered, {}", register.getUsername());
         return true;
     }
 

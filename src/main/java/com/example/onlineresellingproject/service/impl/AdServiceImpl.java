@@ -16,6 +16,8 @@ import com.example.onlineresellingproject.repository.AdEntityRepo;
 import com.example.onlineresellingproject.service.AdService;
 import com.example.onlineresellingproject.service.FilesService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,6 +29,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AdServiceImpl implements AdService {
 
+    private final Logger logger = LoggerFactory.getLogger(AdServiceImpl.class);
+
     private final AdEntityRepo repository;
 
     private final AdMapper adMapper;
@@ -36,29 +40,44 @@ public class AdServiceImpl implements AdService {
     @Override
     public final AdEntity post(AdEntity model) {
         if (model != null) {
+            logger.debug("Ad Entity model posted, {}", model.getTitle());
             return repository.save(model);
-        } else throw new NotValidModelException();
+        } else {
+            logger.error("Ad Entity model not valid");
+            throw new NotValidModelException();
+        }
     }
 
     @Override
     public final AdEntity patch(AdEntity model) {
         if (model != null) {
+            logger.debug("Ad Entity model patched, {}", model.getTitle());
             return repository.save(model);
-        } else throw new NotValidModelException();
+        } else {
+            logger.error("Ad Entity model not valid");
+            throw new NotValidModelException();
+        }
     }
 
     @Override
     public final void delete(Long id) {
         if (id != null) {
             repository.deleteById(id);
-        } else throw new NotValidDataException();
+            logger.debug("Ad Entity model deleted, {}", id);
+        } else {
+            logger.error("Ad Entity model not valid");
+            throw new NotValidDataException();
+        }
     }
 
     @Override
     public final AdEntity get(Long id) {
         if (id != null) {
             return repository.findById(id).orElseThrow(NotFoundInDataBaseException::new);
-        } else throw new NotValidDataException();
+        } else {
+            logger.error("Ad Entity model not valid");
+            throw new NotValidDataException();
+        }
     }
 
     @Override
@@ -85,10 +104,15 @@ public class AdServiceImpl implements AdService {
     public void deleteAd(UserEntity userEntity, Long id) {
         if (userEntity.getRole().equals(Role.ADMIN)) {
             delete(id);
+            logger.debug("Ad deleted by admin, {}", userEntity.getUsername());
         } else {
             if (get(id).getUser().getId().equals(userEntity.getId())) {
                 delete(id);
-            } else throw new NoAccessException("Вы не можете удалить объявление другого пользователя");
+                logger.debug("Ad deleted by user, {}", userEntity.getUsername());
+            } else {
+                logger.error("No Access to delete Ad by user, {}", userEntity.getUsername());
+                throw new NoAccessException("Вы не можете удалить объявление другого пользователя");
+            }
         }
     }
 
@@ -108,6 +132,7 @@ public class AdServiceImpl implements AdService {
     public Ad updateImage(Long id, UserDetails userDetails, MultipartFile multipartFile) {
         AdEntity adEntity = get(id);
         adEntity.setImage(filesService.saveAdsImage(multipartFile));
+        logger.debug("Ad image updated by {}", userDetails.getUsername());
         return adMapper.mapToAd(adEntity);
     }
 
