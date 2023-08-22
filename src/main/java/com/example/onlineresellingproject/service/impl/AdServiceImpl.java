@@ -4,8 +4,10 @@ import com.example.onlineresellingproject.dto.ad.Ad;
 import com.example.onlineresellingproject.dto.ad.Ads;
 import com.example.onlineresellingproject.dto.ad.CreateOrUpdateAd;
 import com.example.onlineresellingproject.dto.ad.ExtendedAd;
+import com.example.onlineresellingproject.dto.user.Role;
 import com.example.onlineresellingproject.entity.AdEntity;
 import com.example.onlineresellingproject.entity.UserEntity;
+import com.example.onlineresellingproject.exceptions.NoAccessException;
 import com.example.onlineresellingproject.exceptions.NotFoundInDataBaseException;
 import com.example.onlineresellingproject.exceptions.NotValidDataException;
 import com.example.onlineresellingproject.exceptions.NotValidModelException;
@@ -77,6 +79,17 @@ public class AdServiceImpl implements AdService {
                 post(new AdEntity()
                         .setFieldsAndReturnEntity(userEntity, createOrUpdateAd,
                                 filesService.saveAdsImage(multipartFile))));
+    }
+
+    @Override
+    public void deleteAd(UserEntity userEntity, Long id) {
+        if (userEntity.getRole().equals(Role.ADMIN)) {
+            delete(id);
+        } else {
+            if (get(id).getUser().getId().equals(userEntity.getId())) {
+                delete(id);
+            } else throw new NoAccessException("Вы не можете удалить объявление другого пользователя");
+        }
     }
 
     @Override
