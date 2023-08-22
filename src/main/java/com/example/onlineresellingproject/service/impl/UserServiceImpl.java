@@ -14,6 +14,8 @@ import com.example.onlineresellingproject.repository.UserEntityRepo;
 import com.example.onlineresellingproject.service.FilesService;
 import com.example.onlineresellingproject.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,6 +25,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
+
+    private final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     private final PasswordEncoder passwordEncoder;
 
@@ -37,15 +41,23 @@ public class UserServiceImpl implements UserService {
     @Override
     public final UserEntity post(UserEntity model) {
         if (model != null) {
+            logger.debug("User Entity model posted, {}", model.getUsername());
             return repository.save(model);
-        } else throw new NotValidModelException();
+        } else {
+            logger.error("User Entity model not valid");
+            throw new NotValidModelException();
+        }
     }
 
     @Override
     public final UserEntity patch(UserEntity model) {
         if (model != null) {
+            logger.debug("User Entity model patched, {}", model.getUsername());
             return repository.save(model);
-        } else throw new NotValidModelException();
+        } else {
+            logger.error("User Entity model not valid");
+            throw new NotValidModelException();
+        }
     }
 
     @Override
@@ -56,6 +68,7 @@ public class UserServiceImpl implements UserService {
         userEntity.setPhone(updateUser.getPhone());
         patch(userEntity);
         statisticMicroService.send(new StatisticMicroServiceMessage(userEntity));
+        logger.debug("User updated, {}", userEntity.getUsername());
         return updateUser;
     }
 
@@ -64,11 +77,13 @@ public class UserServiceImpl implements UserService {
         UserEntity userEntity = findUserEntityByLogin(userDetails.getUsername());
         userEntity.setImage(filesService.saveUserImage(multipartFile));
         statisticMicroService.send(new StatisticMicroServiceMessage(userEntity));
+        logger.debug("User image updated, {}", multipartFile.getOriginalFilename());
         return patch(userEntity);
     }
 
     @Override
     public UserEntity findUserEntityByLogin(String username) {
+        logger.debug("Find user entity by login, {}", username);
         return repository.findUserEntityByUsername(username)
                 .orElseThrow(NotFoundInDataBaseException::new);
     }
@@ -84,6 +99,7 @@ public class UserServiceImpl implements UserService {
         userEntity.setPassword(passwordEncoder.encode(newPassword.getNewPassword()));
         post(userEntity);
         statisticMicroService.send(new StatisticMicroServiceMessage(userEntity));
+        logger.debug("User password updated");
         return userEntity;
     }
 

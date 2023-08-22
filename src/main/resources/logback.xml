@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true" scan="true" scanPeriod="30 seconds">
+    <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- developers logs setup  -->
+    <appender name="APP_FILE"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs\OnlineReselling.log</file>
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>OnlineReselling.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- save log files 30 days -->
+            <maxHistory>30</maxHistory>
+            <!-- Max log file size 1 Mb -->
+            <totalSizeCap>1MB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{dd.MM.yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{20} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- developers logs custom setup  -->
+    <logger name="com.example.onlineresellingproject.OnlineResellingProjectApplication" level="info">
+        <appender-ref ref="APP_FILE"/>
+    </logger>
+
+    <logger name="com.example.onlineresellingproject.service.impl.FilesServiceImpl" level="info">
+        <appender-ref ref="APP_FILE"/>
+    </logger>
+
+    <logger name="com.example.onlineresellingproject.service.impl.UserServiceImpl" level="info">
+        <appender-ref ref="APP_FILE"/>
+    </logger>
+
+    <logger name="com.example.onlineresellingproject.service.impl.CommentServiceImpl" level="info">
+        <appender-ref ref="APP_FILE"/>
+    </logger>
+
+    <logger name="com.example.onlineresellingproject.service.impl.AuthServiceImpl" level="info">
+        <appender-ref ref="APP_FILE"/>
+    </logger>
+
+    <logger name="com.example.onlineresellingproject.service.impl.AdServiceImpl" level="info">
+        <appender-ref ref="APP_FILE"/>
+    </logger>
+
+    <!-- hibernate logs setup  -->
+    <appender name="HIBERNATE_FILE"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs\OnlineReselling_hibernate.log</file>
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>OnlineReselling_hibernate.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- save log files 30 days -->
+            <maxHistory>30</maxHistory>
+            <!-- Max log file size 10 Mb -->
+            <totalSizeCap>10MB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{dd.MM.yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{20} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <!-- hibernate logs setup (do not enable!!! only for hibernate debug!!!) -->
+<!--    <logger name="org.hibernate" level="debug">-->
+<!--        <appender-ref ref="HIBERNATE_FILE"/>-->
+<!--    </logger>-->
+<!--    <logger name="org.hibernate.sql" level="debug">-->
+<!--        <appender-ref ref="HIBERNATE_FILE" />-->
+<!--    </logger>-->
+
+    <!-- app root level logs  setup  -->
+    <root level="info">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="APP_FILE"/>
+    </root>
+</configuration>
