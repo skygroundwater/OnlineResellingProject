@@ -1,11 +1,7 @@
 package com.example.onlineresellingproject.entity;
 
 import com.example.onlineresellingproject.dto.ad.CreateOrUpdateAd;
-import lombok.NoArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -20,6 +16,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Column;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "ads")
@@ -72,5 +69,19 @@ public class AdEntity extends ProjectEntity {
         this.setTitle(createOrUpdateAd.getTitle());
         this.setPrice(createOrUpdateAd.getPrice());
         return this;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AdEntity adEntity = (AdEntity) o;
+        return Objects.equals(id, adEntity.id) && Objects.equals(createdAt, adEntity.createdAt) && Objects.equals(image, adEntity.image) && Objects.equals(price, adEntity.price) && Objects.equals(title, adEntity.title) && Objects.equals(description, adEntity.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, createdAt, image, price, title, description);
     }
 }

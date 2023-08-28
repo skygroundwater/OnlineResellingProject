@@ -1,4 +1,4 @@
-package com.example.onlineresellingproject.microservicemsg.messages;
+package com.example.onlineresellingproject.microservicemsg.message;
 
 import java.io.Serializable;
 

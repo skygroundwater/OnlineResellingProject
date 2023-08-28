@@ -1,7 +1,6 @@
-package com.example.onlineresellingproject.microservicemsg.messages;
+package com.example.onlineresellingproject.microservicemsg.message;
 
 import com.example.onlineresellingproject.entity.UserEntity;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
