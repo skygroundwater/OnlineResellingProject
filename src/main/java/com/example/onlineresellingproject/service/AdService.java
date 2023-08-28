@@ -25,11 +25,11 @@ public interface AdService {
               CreateOrUpdateAd dto,
               MultipartFile multipartFile);
 
-    Ad updateImage(Long id, UserDetails userDetails, MultipartFile multipartFile);
+    Ad updateImage(Long id, UserEntity userEntity, MultipartFile multipartFile);
 
     Ads findUserAds(UserEntity userEntity);
 
-    void deleteAd(UserEntity userEntity, Long id);
+    String deleteAd(UserEntity userEntity, Long id);
 
     ExtendedAd getExtendedAd(Long id);
 

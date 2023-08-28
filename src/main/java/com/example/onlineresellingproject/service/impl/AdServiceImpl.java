@@ -101,16 +101,22 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
-    public void deleteAd(UserEntity userEntity, Long id) {
+    public String deleteAd(UserEntity userEntity, Long id) {
+        String msg;
         if (userEntity.getRole().equals(Role.ADMIN)) {
             delete(id);
-            logger.debug("Ad deleted by admin, {}", userEntity.getUsername());
+            msg = String.format("Ad deleted by admin, %s", userEntity.getUsername());
+            logger.debug(msg);
+            return msg;
         } else {
             if (get(id).getUser().getId().equals(userEntity.getId())) {
                 delete(id);
-                logger.debug("Ad deleted by user, {}", userEntity.getUsername());
+                msg = String.format("Ad deleted by user, %s", userEntity.getUsername());
+                logger.debug(msg);
+                return msg;
             } else {
-                logger.error("No Access to delete Ad by user, {}", userEntity.getUsername());
+                msg = String.format("No Access to delete Ad by user, %s", userEntity.getUsername());
+                logger.error(msg);
                 throw new NoAccessException("Вы не можете удалить объявление другого пользователя");
             }
         }
@@ -129,10 +135,10 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
-    public Ad updateImage(Long id, UserDetails userDetails, MultipartFile multipartFile) {
+    public Ad updateImage(Long id, UserEntity userEntity, MultipartFile multipartFile) {
         AdEntity adEntity = get(id);
         adEntity.setImage(filesService.saveAdsImage(multipartFile));
-        logger.debug("Ad image updated by {}", userDetails.getUsername());
+        logger.debug("Ad image updated by {}", userEntity.getUsername());
         return adMapper.mapToAd(adEntity);
     }
 

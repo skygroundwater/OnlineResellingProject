@@ -2,7 +2,7 @@ package com.example.onlineresellingproject.controller;
 
 import com.example.onlineresellingproject.dto.user.Login;
 import com.example.onlineresellingproject.dto.user.Register;
-import com.example.onlineresellingproject.microservicemsg.localservices.StatisticMicroService;
+import com.example.onlineresellingproject.microservicemsg.localservice.StatisticMicroService;
 import com.example.onlineresellingproject.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

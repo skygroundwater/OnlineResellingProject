@@ -1,6 +1,5 @@
 package com.example.onlineresellingproject.entity;
 
-
 import com.example.onlineresellingproject.dto.user.Role;
 import lombok.NoArgsConstructor;
 import lombok.Getter;
@@ -22,6 +21,7 @@ import javax.persistence.EnumType;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -80,4 +80,38 @@ public class UserEntity extends ProjectEntity {
     @Column(name = "is_enabled")
     private boolean isEnabled = true;
 
+    public UserEntity(Long id, String username,
+                      String password, String firstName,
+                      String lastName, String phone,
+                      Role role, String image) {
+        this.id = id;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.phone = phone;
+        this.role = role;
+        this.image = image;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserEntity user = (UserEntity) o;
+        return nonExpired == user.nonExpired && nonLocked == user.nonLocked
+                && nonCredentialsExpired == user.nonCredentialsExpired
+                && isEnabled == user.isEnabled && Objects.equals(id, user.id)
+                && Objects.equals(username, user.username) && Objects.equals(password, user.password)
+                && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName)
+                && Objects.equals(phone, user.phone) && role == user.role && Objects.equals(image, user.image)
+                && Objects.equals(registrationDate, user.registrationDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, password, firstName,
+                lastName, phone, role, image, registrationDate,
+                nonExpired, nonLocked, nonCredentialsExpired, isEnabled);
+    }
 }

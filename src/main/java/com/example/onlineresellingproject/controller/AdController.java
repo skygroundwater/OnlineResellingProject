@@ -37,8 +37,6 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/ads")
 public class AdController {
 
-    private final AdMapper adMapper;
-
     private final AdService adService;
 
     private final UserService userService;
@@ -255,7 +253,7 @@ public class AdController {
     public ResponseEntity<Ad> updateImage(@PathVariable Long id,
                                           @RequestParam MultipartFile multipartFile) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return ResponseEntity.ok(adService.updateImage(id, userDetails, multipartFile));
+        return ResponseEntity.ok(adService.updateImage(id, userService.findUserEntityByLogin(userDetails.getUsername()), multipartFile));
 
     }
 
