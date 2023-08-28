@@ -11,7 +11,7 @@
     <!-- developers logs setup  -->
     <appender name="APP_FILE"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logs\OnlineReselling.log</file>
+        <file>OnlineReselling.log</file>
         <rollingPolicy
                 class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- daily rollover -->

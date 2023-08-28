@@ -1,6 +1,6 @@
 package com.example.onlineresellingproject.config;
 
-import com.example.onlineresellingproject.microservicemsg.messages.StatisticMicroServiceMessage;
+import com.example.onlineresellingproject.microservicemsg.message.StatisticsMessage;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +19,7 @@ public class StatisticsServiceConfig {
     private static final String BOOTSTRAP_SERVER = "127.0.0.1:9092";
 
     @Bean
-    public ProducerFactory<String, StatisticMicroServiceMessage> producerFactory() {
+    public ProducerFactory<String, StatisticsMessage> producerFactory() {
 
         Map<String, Object> config = new HashMap<>();
 
@@ -33,7 +33,7 @@ public class StatisticsServiceConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, StatisticMicroServiceMessage> statisticServiceMessageKafkaTemplate() {
+    public KafkaTemplate<String, StatisticsMessage> statisticServiceMessageKafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 

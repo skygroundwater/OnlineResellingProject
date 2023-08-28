@@ -1,4 +1,4 @@
-package com.example.onlineresellingproject.microservicemsg.messages;
+package com.example.onlineresellingproject.microservicemsg.message;
 
 import com.example.onlineresellingproject.OnlineResellingProjectApplication;
 import com.example.onlineresellingproject.entity.UserEntity;
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Data
 @Slf4j
 @EqualsAndHashCode
-public class StatisticMicroServiceMessage implements MicroServiceMessage {
+public class StatisticsMessage implements MicroServiceMessage {
 
     private static long counter;
 
@@ -25,7 +25,7 @@ public class StatisticMicroServiceMessage implements MicroServiceMessage {
 
     private transient String toServiceName;
 
-    public StatisticMicroServiceMessage(UserEntity userEntity) {
+    public StatisticsMessage(UserEntity userEntity) {
         messageId = counter++;
         userInfo = new NestedUserInfo(userEntity);
         timeSending = LocalDateTime.now();
