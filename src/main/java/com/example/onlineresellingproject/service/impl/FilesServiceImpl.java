@@ -77,7 +77,7 @@ public class FilesServiceImpl implements FilesService {
     }
 
     private String getNewFileName(MultipartFile file) {
-        String[] split = Objects.requireNonNull(file.getOriginalFilename()).split("\\.");
+        String[] split = Objects.requireNonNull(file.getName()).split("\\.");
         String extension = split[split.length - 1];
         String newFileName = UUID.randomUUID() + "." + extension;
         logger.debug("Get new file name {}", newFileName);
