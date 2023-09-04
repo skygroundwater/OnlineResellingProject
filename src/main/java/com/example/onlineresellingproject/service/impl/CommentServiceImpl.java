@@ -87,6 +87,6 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Comments findCommentsByAdId(Long id) {
         return commentMapper.mapToComments(
-                repository.findAllByAd_Id(id));
+                repository.findAllByAdId(id));
     }
 }

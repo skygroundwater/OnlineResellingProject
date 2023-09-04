@@ -1,10 +1,7 @@
 package com.example.onlineresellingproject.controller;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,6 +10,7 @@ import java.nio.file.Path;
 
 @RestController
 @CrossOrigin(value = "http://localhost:3000")
+@RequestMapping("/images")
 public class ImageController {
 
     @Value("${path.to.image}")
@@ -22,12 +20,12 @@ public class ImageController {
     @Value("${path.to.image.ads}")
     private String adsImagesPath;
 
-    @GetMapping("/images/users/{imageId}")
+    @GetMapping("/users/{imageId}")
     public byte[] getUserImage(@PathVariable String imageId) throws IOException {
         return Files.readAllBytes(Path.of(imagesPath + usersImagesPath + File.separator + imageId));
     }
 
-    @GetMapping("/images/ads/{imageId}")
+    @GetMapping("/ads/{imageId}")
     public byte[] getAdImage(@PathVariable String imageId) throws IOException {
         return Files.readAllBytes(Path.of(imagesPath + adsImagesPath + File.separator + imageId));
     }

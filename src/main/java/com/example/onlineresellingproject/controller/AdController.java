@@ -94,14 +94,14 @@ public class AdController {
     }
 
     @Operation(
-            summary = "Добавление объявления",
+            summary = "Получение информации об объявлении",
             responses = {
                     @ApiResponse(
-                            responseCode = "201",
+                            responseCode = "200",
                             description = "Добавлена",
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                    array = @ArraySchema(schema = @Schema(implementation = Ad.class))
+                                    schema = @Schema(implementation = ExtendedAd.class)
                             )
                     ),
                     @ApiResponse(
@@ -109,13 +109,13 @@ public class AdController {
                             description = "Нет авторизации"
                     )
             }
-
     )
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
-    public ResponseEntity<ExtendedAd> getAd(@PathVariable Long id) {
+    public ResponseEntity<ExtendedAd> getAds(@PathVariable Long id) {
+        ExtendedAd ad = adService.getExtendedAd(id);
         return ResponseEntity.ok(
-                adService.getExtendedAd(id)
+                ad
         );
     }
 
