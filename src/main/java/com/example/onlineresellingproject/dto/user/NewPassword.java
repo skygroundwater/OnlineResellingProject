@@ -4,10 +4,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
-public class NewPassword extends Credentials {
+@EqualsAndHashCode
+public class NewPassword {
 
     private String currentPassword;
 

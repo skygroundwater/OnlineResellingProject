@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Pattern;
 
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User extends UserDTO {
+public class User {
 
     private Integer id;
 

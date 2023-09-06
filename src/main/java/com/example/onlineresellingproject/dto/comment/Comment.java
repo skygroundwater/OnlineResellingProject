@@ -1,13 +1,18 @@
 package com.example.onlineresellingproject.dto.comment;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Data;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
-
 import java.time.LocalDateTime;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
-public class Comment extends CommentDTO {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
+public class Comment {
 
     private Long author;
     private String authorImage;

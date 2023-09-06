@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class CommentMapper implements Mapper {
+public final class CommentMapper {
 
     public Comment mapToComment(CommentEntity entity) {
         Comment comment = new Comment();

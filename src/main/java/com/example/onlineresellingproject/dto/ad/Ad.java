@@ -1,15 +1,17 @@
 package com.example.onlineresellingproject.dto.ad;
 
-import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-
+import lombok.Data;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import java.util.Objects;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
-public class Ad extends AdDTO {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class Ad {
 
     private Integer pk;
 

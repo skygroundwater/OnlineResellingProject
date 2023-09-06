@@ -7,7 +7,6 @@ import com.example.onlineresellingproject.dto.ad.ExtendedAd;
 import com.example.onlineresellingproject.dto.comment.Comment;
 import com.example.onlineresellingproject.dto.comment.Comments;
 import com.example.onlineresellingproject.dto.comment.CreateOrUpdateComment;
-import com.example.onlineresellingproject.mappers.AdMapper;
 import com.example.onlineresellingproject.service.AdService;
 import com.example.onlineresellingproject.service.CommentService;
 import com.example.onlineresellingproject.service.UserService;
@@ -22,13 +21,25 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+/**
+ * Контролле для работы с объявлениями
+ */
 @Tag(name = "Объявления", description = "Контроллер для манипуляции с объявлениями")
 @Slf4j
 @CrossOrigin(value = "http://localhost:3000")

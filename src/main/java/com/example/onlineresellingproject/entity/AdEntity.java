@@ -25,7 +25,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AdEntity extends ProjectEntity {
+public class AdEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
