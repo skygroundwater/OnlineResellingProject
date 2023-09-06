@@ -2,11 +2,11 @@ package com.example.onlineresellingproject.dto.ad;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.util.Objects;
 
 @Builder
+@Data
 public class ExtendedAd extends AdDTO {
 
     private Integer pk;
