@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class AdMapper implements Mapper {
+public final class AdMapper {
 
     public Ad mapToAd(AdEntity entity) {
         Integer adId = Math.toIntExact(entity.getId());

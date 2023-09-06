@@ -7,7 +7,7 @@ import java.util.Objects;
 
 @Builder
 @Data
-public class ExtendedAd extends AdDTO {
+public class ExtendedAd {
 
     private Integer pk;
 

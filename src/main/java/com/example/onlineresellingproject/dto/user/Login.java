@@ -3,9 +3,9 @@ package com.example.onlineresellingproject.dto.user;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
-public class Login extends Credentials {
+@EqualsAndHashCode
+public class Login {
 
     private String username;
     private char[] password;

@@ -9,6 +9,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class LoggerConfig {
 
+    /**
+     * Инициализируем логгера
+     * @return
+     */
     @Bean
     public Logger logger() {
         return LoggerFactory.getLogger(OnlineResellingProjectApplication.class);

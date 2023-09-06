@@ -5,7 +5,7 @@ import com.example.onlineresellingproject.entity.UserEntity;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserMapper implements Mapper {
+public final class UserMapper {
 
     public User mapToUser(UserEntity userEntity) {
         Integer id = Math.toIntExact(userEntity.getId());
