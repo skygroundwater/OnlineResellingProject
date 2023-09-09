@@ -13,11 +13,19 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Конфигурационный класс для настройки связи с Kafka и отправки сообщений статистики.
+ */
 @Configuration
 public class StatisticsServiceConfig {
 
     private static final String BOOTSTRAP_SERVER = "127.0.0.1:9092";
 
+    /**
+     * Метод создает и настраивает фабрику для создания Kafka-продюсера.
+     *
+     * @return Фабрика для создания Kafka-продюсера с настроенными параметрами.
+     */
     @Bean
     public ProducerFactory<String, StatisticsMessage> producerFactory() {
 
@@ -32,6 +40,11 @@ public class StatisticsServiceConfig {
         return new DefaultKafkaProducerFactory<>(config);
     }
 
+    /**
+     * Метод создает Kafka-шаблон для отправки сообщений статистики.
+     *
+     * @return Kafka-шаблон для отправки сообщений статистики с использованием фабрики продюсера.
+     */
     @Bean
     public KafkaTemplate<String, StatisticsMessage> statisticServiceMessageKafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());

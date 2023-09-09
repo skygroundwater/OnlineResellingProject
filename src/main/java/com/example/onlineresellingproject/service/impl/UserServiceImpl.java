@@ -22,6 +22,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+/**
+ * Реализация интерфейса UserService для управления пользователями.
+ */
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {

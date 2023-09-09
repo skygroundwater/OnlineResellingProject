@@ -6,21 +6,45 @@ import lombok.NoArgsConstructor;
 
 import java.util.Objects;
 
+/**
+ * Класс, представляющий объявление.
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class Ad extends AdDTO {
 
+    /**
+     * Уникальный идентификатор объявления.
+     */
     private Integer pk;
 
+    /**
+     * Уникальный идентификатор автора объявления.
+     */
     private Integer author;
 
+    /**
+     * Путь к изображению объявления.
+     */
     private String image;
 
+    /**
+     * Цена объявления.
+     */
     private Integer price;
 
+    /**
+     * Заголовок объявления.
+     */
     private String title;
 
+    /**
+     * Переопределенный метод для сравнения объектов класса Ad.
+     *
+     * @param o Объект, с которым выполняется сравнение.
+     * @return true, если объекты равны, и false в противном случае.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -29,6 +53,11 @@ public class Ad extends AdDTO {
         return Objects.equals(pk, ad.pk) && Objects.equals(author, ad.author) && Objects.equals(image, ad.image) && Objects.equals(price, ad.price) && Objects.equals(title, ad.title);
     }
 
+    /**
+     * Переопределенный метод для вычисления хэш-кода объекта.
+     *
+     * @return Хэш-код объекта.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(pk, author, image, price, title);

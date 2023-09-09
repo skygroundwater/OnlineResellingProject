@@ -18,6 +18,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Класс, представляющий сущность объявления в приложении.
+ * Этот класс соответствует таблице "ads" в базе данных и используется
+ * для хранения информации о объявлениях пользователей.
+ */
 @Entity
 @Table(name = "ads")
 @Getter
@@ -53,6 +58,14 @@ public class AdEntity extends ProjectEntity {
     @Column(name = "description")
     private String description;
 
+    /**
+     * Метод для установки полей объекта AdEntity из DTO и пути к изображению.
+     *
+     * @param userEntity    Сущность пользователя, создавшего объявление.
+     * @param dto           DTO с информацией об объявлении.
+     * @param pathToImage   Путь к изображению.
+     * @return              Обновленная сущность объявления.
+     */
     public final AdEntity setFieldsAndReturnEntity(UserEntity userEntity,
                                                    CreateOrUpdateAd dto,
                                                    String pathToImage) {
@@ -64,6 +77,12 @@ public class AdEntity extends ProjectEntity {
         return this;
     }
 
+    /**
+     * Метод для установки полей объекта AdEntity из DTO.
+     *
+     * @param createOrUpdateAd   DTO с информацией об объявлении.
+     * @return                  Обновленная сущность объявления.
+     */
     public final AdEntity setFieldsAndReturnEntity(CreateOrUpdateAd createOrUpdateAd) {
         this.setDescription(createOrUpdateAd.getDescription());
         this.setTitle(createOrUpdateAd.getTitle());
