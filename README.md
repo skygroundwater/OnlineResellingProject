@@ -60,7 +60,7 @@ docker run --rm -p 3000:3000 ghcr.io/bizinmitya/front-react-avito:v1.19
 
 **2. [Anton Ryabinin](https://github.com/Ryabinin85)**
 
-**3. [Bulkanov Gleb]()**
+**3. [Bulkanov Gleb](https://github.com/Kykysiki)**
 
 **4. [Sokolov Gleb](https://github.com/GlSokolov)**
 
