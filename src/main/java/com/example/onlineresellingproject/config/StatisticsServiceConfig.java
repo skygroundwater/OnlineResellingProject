@@ -18,6 +18,12 @@ public class StatisticsServiceConfig {
 
     private static final String BOOTSTRAP_SERVER = "127.0.0.1:9092";
 
+    /**
+     * Инициализируем продюссера для отправки
+     * статистических сообщений в сторонний микросервис
+     * и задаем ему характеристики
+     * @return
+     */
     @Bean
     public ProducerFactory<String, StatisticsMessage> producerFactory() {
 

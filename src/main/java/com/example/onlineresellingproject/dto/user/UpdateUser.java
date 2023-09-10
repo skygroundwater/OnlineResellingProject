@@ -6,10 +6,10 @@ import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.Pattern;
 
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode
 @Data
 @AllArgsConstructor
-public class UpdateUser extends UserDTO {
+public class UpdateUser {
 
     private String firstName;
 

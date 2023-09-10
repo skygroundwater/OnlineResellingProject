@@ -6,7 +6,6 @@ import com.example.onlineresellingproject.dto.ad.CreateOrUpdateAd;
 import com.example.onlineresellingproject.dto.ad.ExtendedAd;
 import com.example.onlineresellingproject.entity.AdEntity;
 import com.example.onlineresellingproject.entity.UserEntity;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface AdService {

@@ -10,6 +10,10 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
+
+/**
+ * Класс конфигурации Spring Security
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
