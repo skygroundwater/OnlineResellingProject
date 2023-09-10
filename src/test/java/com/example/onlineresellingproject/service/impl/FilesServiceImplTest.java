@@ -6,6 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -99,7 +100,7 @@ class FilesServiceImplTest {
         } catch (IOException e) {
             logger.error(e.getMessage());
         }
-        mockFile = new MockMultipartFile(name, content);
+        mockFile = new MockMultipartFile(name, name, MediaType.MULTIPART_FORM_DATA_VALUE, content);
 
         String invoke = (String) method.invoke(filesService, mockFile);
         String[] split = invoke.split("\\.");
