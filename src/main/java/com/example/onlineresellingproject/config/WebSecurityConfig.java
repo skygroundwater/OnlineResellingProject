@@ -10,9 +10,8 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
-
 /**
- * Класс конфигурации Spring Security
+ * Конфигурационный класс для настройки безопасности веб-приложения.
  */
 @Configuration
 @EnableWebSecurity
@@ -36,18 +35,14 @@ public class WebSecurityConfig {
             "/register"
     };
 
-    /*@Bean
-    public InMemoryUserDetailsManager userDetailsService(PasswordEncoder passwordEncoder) {
-        UserDetails user =
-                User.builder()
-                        .username("o.metelev2020@yandex.ru")
-                        .password("pupsichka")
-                        .passwordEncoder(passwordEncoder::encode)
-                        .roles(Role.USER.name())
-                        .build();
-        return new InMemoryUserDetailsManager(user);
-    }*/
 
+    /**
+     * Метод создает фильтр цепочки безопасности для настройки правил авторизации и аутентификации HTTP-запросов.
+     *
+     * @param http Объект HttpSecurity для настройки безопасности.
+     * @return Фильтр цепочки безопасности с настроенными правилами.
+     * @throws Exception В случае ошибки при настройке безопасности.
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http

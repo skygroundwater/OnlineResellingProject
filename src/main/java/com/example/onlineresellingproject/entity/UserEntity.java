@@ -23,6 +23,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Класс {@code UserEntity} представляет собой сущность пользователя в системе онлайн-продаж.
+ *
+ * <p>Пользователи могут создавать объявления и оставлять комментарии.
+ *
+ * @see ProjectEntity
+ */
 @Entity
 @Table(name = "users")
 @Getter
@@ -32,54 +39,111 @@ import java.util.Objects;
 @AllArgsConstructor
 public class UserEntity {
 
+    /**
+     * Уникальный идентификатор пользователя.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * Логин пользователя.
+     */
     @Column(name = "username")
     private String username;
 
+    /**
+     * Хэш пароля пользователя.
+     */
     @Column(name = "password")
     private String password;
 
+    /**
+     * Имя пользователя.
+     */
     @Column(name = "first_name")
     private String firstName;
 
+    /**
+     * Фамилия пользователя.
+     */
     @Column(name = "last_name")
     private String lastName;
 
+    /**
+     * Номер телефона пользователя в формате +7 (XXX) XXX-XX-XX.
+     */
     @Column(name = "phone")
     @Pattern(regexp = "\\+7\\s?\\(?\\d{3}\\)?\\s?\\d{3}-?\\d{2}-?\\d{2}")
     private String phone;
 
+    /**
+     * Роль пользователя (USER или ADMIN).
+     */
     @Enumerated(value = EnumType.STRING)
     @Column(name = "role")
     private Role role;
 
+    /**
+     * Путь к изображению пользователя.
+     */
     @Column(name = "image")
     private String image;
 
+    /**
+     * Дата и время регистрации пользователя.
+     */
     @Column(name = "reg_date")
     private LocalDateTime registrationDate = LocalDateTime.now();
 
+    /**
+     * Список объявлений, созданных пользователем.
+     */
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<AdEntity> ads;
 
+    /**
+     * Список комментариев, оставленных пользователем.
+     */
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<CommentEntity> comments;
 
+    /**
+     * Флаг, указывающий, не истек ли срок действия учетной записи пользователя.
+     */
     @Column(name = "non_expired")
     private boolean nonExpired = true;
 
+    /**
+     * Флаг, указывающий, не заблокирована ли учетная запись пользователя.
+     */
     @Column(name = "non_locked")
     private boolean nonLocked = true;
 
+    /**
+     * Флаг, указывающий, не истек ли срок действия учетных данных пользователя.
+     */
     @Column(name = "non_credentials_expired")
     private boolean nonCredentialsExpired = true;
 
+    /**
+     * Флаг, указывающий, включена ли учетная запись пользователя.
+     */
     @Column(name = "is_enabled")
     private boolean isEnabled = true;
 
+    /**
+     * Конструктор для инициализации основных полей пользователя.
+     *
+     * @param id       Уникальный идентификатор пользователя.
+     * @param username Логин пользователя.
+     * @param password Хэш пароля пользователя.
+     * @param firstName Имя пользователя.
+     * @param lastName Фамилия пользователя.
+     * @param phone    Номер телефона пользователя в формате +7 (XXX) XXX-XX-XX.
+     * @param role     Роль пользователя (USER или ADMIN).
+     * @param image    Путь к изображению пользователя.
+     */
     public UserEntity(Long id, String username,
                       String password, String firstName,
                       String lastName, String phone,
@@ -94,6 +158,12 @@ public class UserEntity {
         this.image = image;
     }
 
+    /**
+     * Метод сравнения пользователей по их полям.
+     *
+     * @param o Объект для сравнения.
+     * @return {@code true}, если объекты равны, {@code false} в противном случае.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -108,6 +178,11 @@ public class UserEntity {
                 && Objects.equals(registrationDate, user.registrationDate);
     }
 
+    /**
+     * Метод для вычисления хэш-кода пользователя.
+     *
+     * @return Хэш-код пользователя.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(id, username, password, firstName,

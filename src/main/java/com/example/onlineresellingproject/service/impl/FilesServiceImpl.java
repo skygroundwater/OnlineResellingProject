@@ -18,6 +18,9 @@ import java.nio.file.Path;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Реализация интерфейса FilesService для управления файлами (изображениями).
+ */
 @Service
 public class FilesServiceImpl implements FilesService {
 

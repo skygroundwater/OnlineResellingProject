@@ -24,6 +24,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Реализация интерфейса AdService для управления объявлениями.
+ */
 @Service
 @RequiredArgsConstructor
 public class AdServiceImpl implements AdService {

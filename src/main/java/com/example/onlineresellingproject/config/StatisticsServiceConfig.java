@@ -13,6 +13,9 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Конфигурационный класс для настройки связи с Kafka и отправки сообщений статистики.
+ */
 @Configuration
 public class StatisticsServiceConfig {
 
@@ -38,6 +41,11 @@ public class StatisticsServiceConfig {
         return new DefaultKafkaProducerFactory<>(config);
     }
 
+    /**
+     * Метод создает Kafka-шаблон для отправки сообщений статистики.
+     *
+     * @return Kafka-шаблон для отправки сообщений статистики с использованием фабрики продюсера.
+     */
     @Bean
     public KafkaTemplate<String, StatisticsMessage> statisticServiceMessageKafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());

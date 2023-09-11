@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 import java.nio.CharBuffer;
 import java.time.LocalDateTime;
 
+/**
+ * Реализация интерфейса AuthService для аутентификации и регистрации пользователей.
+ */
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
