@@ -1,3 +1,6 @@
+/**
+ * Контроллер для аутентификации и регистрации пользователей.
+ */
 package com.example.onlineresellingproject.controller;
 
 import com.example.onlineresellingproject.dto.user.Login;
@@ -23,6 +26,13 @@ public class  AuthController {
 
     private final StatisticMicroService statisticMicroService;
 
+    /**
+     * Метод для аутентификации пользователя.
+     *
+     * @param login Объект, содержащий информацию о входе пользователя.
+     * @return Ответ с кодом состояния HTTP. В случае успешной аутентификации возвращается 200 OK,
+     * в противном случае - 401 Unauthorized.
+     */
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Login login) {
         if (authService.login(login.getUsername(), login.getPassword())) {
@@ -33,6 +43,13 @@ public class  AuthController {
         }
     }
 
+    /**
+     * Метод для регистрации нового пользователя.
+     *
+     * @param register Объект, содержащий информацию о регистрации нового пользователя.
+     * @return Ответ с кодом состояния HTTP. В случае успешной регистрации возвращается 201 Created,
+     * в противном случае - 400 Bad Request.
+     */
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody Register register) {
         if (authService.register(register)) {

@@ -1,0 +1,244 @@
+30.08.2023 16:25:14.337 [main] INFO  o.t.u.ImageNameSubstitutor - Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+30.08.2023 16:25:14.497 [main] INFO  o.t.d.DockerClientProviderStrategy - Loaded org.testcontainers.dockerclient.UnixSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+30.08.2023 16:25:14.794 [main] INFO  o.t.d.DockerClientProviderStrategy - Found Docker environment with local Unix socket (unix:///var/run/docker.sock)
+30.08.2023 16:25:14.795 [main] INFO  o.t.DockerClientFactory - Docker host IP address is localhost
+30.08.2023 16:25:14.816 [main] INFO  o.t.DockerClientFactory - Connected to docker: 
+  Server Version: 24.0.2
+  API Version: 1.43
+  Operating System: Docker Desktop
+  Total Memory: 7851 MB
+30.08.2023 16:25:14.836 [main] INFO  t.t.5.1 - Creating container for image: testcontainers/ryuk:0.5.1
+30.08.2023 16:25:15.151 [main] INFO  o.t.u.RegistryAuthLocator - Credential helper/store (docker-credential-desktop) does not have credentials for https://index.docker.io/v1/
+30.08.2023 16:25:15.226 [main] INFO  t.t.5.1 - Container testcontainers/ryuk:0.5.1 is starting: 0240e1a82ae6b1d73cb8b7ab33fe1926e61d6a62e970caf4ab512ec9d9cdaaa3
+30.08.2023 16:25:15.484 [main] INFO  t.t.5.1 - Container testcontainers/ryuk:0.5.1 started in PT0.657632S
+30.08.2023 16:25:15.490 [main] INFO  o.t.u.RyukResourceReaper - Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+30.08.2023 16:25:15.490 [main] INFO  o.t.DockerClientFactory - Checking the system...
+30.08.2023 16:25:15.491 [main] INFO  o.t.DockerClientFactory - ✔︎ Docker server version should be at least 1.6.0
+30.08.2023 16:25:15.491 [main] INFO  tc.postgres:15 - Creating container for image: postgres:15
+30.08.2023 16:25:15.530 [main] INFO  tc.postgres:15 - Container postgres:15 is starting: 31d1709a9ffffaa907cf0269d3c0148ea33eb25a61bf83884ac6f47d6a240152
+30.08.2023 16:25:16.693 [main] INFO  tc.postgres:15 - Container postgres:15 started in PT1.202461S
+30.08.2023 16:25:16.694 [main] INFO  tc.postgres:15 - Container is started (JDBC URL: jdbc:postgresql://localhost:52158/database_name?loggerLevel=OFF)
+30.08.2023 16:25:16.735 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.example.onlineresellingproject.service.impl.AdServiceImplTest], using SpringBootContextLoader
+30.08.2023 16:25:16.737 [main] INFO  o.s.t.c.s.AbstractContextLoader - Could not detect default resource locations for test class [com.example.onlineresellingproject.service.impl.AdServiceImplTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+30.08.2023 16:25:16.828 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener, org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener, org.springframework.security.test.context.support.ReactorContextTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener]
+30.08.2023 16:25:16.839 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@53f4c1e6, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@74174a23, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@6342d610, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@dc4a691, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@784abd3e, org.springframework.test.context.support.DirtiesContextTestExecutionListener@36c2b646, org.springframework.test.context.transaction.TransactionalTestExecutionListener@434514d8, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@6b1dc20f, org.springframework.test.context.event.EventPublishingTestExecutionListener@4613311f, org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener@6540cf1d, org.springframework.security.test.context.support.ReactorContextTestExecutionListener@ec8f4b9, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@bc042d5, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@5484117b, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@37df14d1, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@7efb53af, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@7724704f, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@3dfa819]
+30.08.2023 16:25:17.222 [background-preinit] INFO  o.h.v.i.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+30.08.2023 16:25:17.229 [main] INFO  c.e.o.s.i.AdServiceImplTest - Starting AdServiceImplTest using Java 11.0.19 on MacBook-Pro-Oleg.local with PID 1078 (started by olegmetelev in /Users/olegmetelev/IdeaProjects/OnlineResellingProject)
+30.08.2023 16:25:17.229 [main] INFO  c.e.o.s.i.AdServiceImplTest - The following 1 profile is active: "online_reselling_tests"
+30.08.2023 16:25:17.703 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+30.08.2023 16:25:17.741 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 34 ms. Found 3 JPA repository interfaces.
+30.08.2023 16:25:18.192 [main] INFO  o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 0 (http)
+30.08.2023 16:25:18.198 [main] INFO  o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
+30.08.2023 16:25:18.198 [main] INFO  o.a.c.c.StandardService - Starting service [Tomcat]
+30.08.2023 16:25:18.198 [main] INFO  o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.78]
+30.08.2023 16:25:18.281 [main] INFO  o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
+30.08.2023 16:25:18.281 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1040 ms
+30.08.2023 16:25:18.479 [main] INFO  c.z.h.HikariDataSource - HikariPool-1 - Starting...
+30.08.2023 16:25:18.611 [main] INFO  c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+30.08.2023 16:25:18.699 [main] INFO  liquibase.database - Set default schema name to public
+30.08.2023 16:25:18.776 [main] INFO  l.lockservice - Successfully acquired change log lock
+30.08.2023 16:25:18.824 [main] INFO  liquibase.changelog - Creating database history table with name: public.databasechangelog
+30.08.2023 16:25:18.829 [main] INFO  liquibase.changelog - Reading from public.databasechangelog
+30.08.2023 16:25:18.885 [main] INFO  liquibase.changelog - Custom SQL executed
+30.08.2023 16:25:18.886 [main] INFO  liquibase.changelog - ChangeSet db.changelog/psql_database_script.sql::1::skygroundwater ran successfully in 27ms
+30.08.2023 16:25:18.904 [main] INFO  l.lockservice - Successfully released change log lock
+30.08.2023 16:25:18.969 [main] INFO  o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+30.08.2023 16:25:19.002 [main] INFO  o.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+30.08.2023 16:25:19.022 [main] INFO  o.h.a.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+30.08.2023 16:25:19.082 [main] INFO  o.h.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+30.08.2023 16:25:19.379 [main] WARN  o.h.e.j.s.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+30.08.2023 16:25:19.379 [main] WARN  o.h.e.j.s.SqlExceptionHelper - constraint "fkhjy5cj20i6dn8t38as5poqt7b" of relation "ads" does not exist, skipping
+30.08.2023 16:25:19.381 [main] WARN  o.h.e.j.s.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+30.08.2023 16:25:19.382 [main] WARN  o.h.e.j.s.SqlExceptionHelper - constraint "fk8c6328vy3jubusjo17ucraqf1" of relation "comments" does not exist, skipping
+30.08.2023 16:25:19.383 [main] WARN  o.h.e.j.s.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+30.08.2023 16:25:19.383 [main] WARN  o.h.e.j.s.SqlExceptionHelper - constraint "fk8omq0tc18jd43bu5tjh6jvraq" of relation "comments" does not exist, skipping
+30.08.2023 16:25:19.388 [main] WARN  o.h.e.j.s.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+30.08.2023 16:25:19.388 [main] WARN  o.h.e.j.s.SqlExceptionHelper - drop cascades to constraint comments_ads_id_fk on table comments
+30.08.2023 16:25:19.412 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+30.08.2023 16:25:19.417 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+30.08.2023 16:25:19.434 [main] INFO  c.e.o.s.i.FilesServiceImpl - File service init method
+30.08.2023 16:25:19.434 [main] INFO  c.e.o.s.i.FilesServiceImpl - File service init method
+30.08.2023 16:25:19.881 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+30.08.2023 16:25:20.725 [main] INFO  o.s.s.w.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1de78f97, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@36b6ce5d, org.springframework.security.web.context.SecurityContextPersistenceFilter@4485ca30, org.springframework.security.web.header.HeaderWriterFilter@625439ba, org.springframework.web.filter.CorsFilter@1a4eb392, org.springframework.security.web.authentication.logout.LogoutFilter@5e9f4f76, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@44cd3ea9, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7a12cb2c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2dca3c72, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@52f1f54, org.springframework.security.web.session.SessionManagementFilter@1942a960, org.springframework.security.web.access.ExceptionTranslationFilter@397ff526, org.springframework.security.web.access.intercept.AuthorizationFilter@793af433]
+30.08.2023 16:25:20.992 [main] INFO  o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
+30.08.2023 16:25:21.013 [main] INFO  o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 52317 (http) with context path ''
+30.08.2023 16:25:21.020 [main] INFO  c.e.o.s.i.AdServiceImplTest - Started AdServiceImplTest in 3.95 seconds (JVM running for 7.245)
+30.08.2023 16:25:21.388 [main] ERROR c.e.o.s.i.AdServiceImpl - Ad Entity model not valid
+30.08.2023 16:25:21.388 [main] ERROR c.e.o.s.i.AdServiceImpl - Ad Entity model not valid
+30.08.2023 16:25:21.418 [main] ERROR c.e.o.s.i.AdServiceImpl - No Access to delete Ad by user, null
+30.08.2023 16:25:21.418 [main] ERROR c.e.o.s.i.AdServiceImpl - No Access to delete Ad by user, null
+30.08.2023 16:25:21.589 [main] ERROR c.e.o.s.i.AdServiceImpl - Ad Entity model not valid
+30.08.2023 16:25:21.589 [main] ERROR c.e.o.s.i.AdServiceImpl - Ad Entity model not valid
+30.08.2023 16:25:21.604 [main] ERROR c.e.o.s.i.AdServiceImpl - Ad Entity model not valid
+30.08.2023 16:25:21.604 [main] ERROR c.e.o.s.i.AdServiceImpl - Ad Entity model not valid
+30.08.2023 16:25:21.619 [main] ERROR c.e.o.s.i.AdServiceImpl - Ad Entity model not valid
+30.08.2023 16:25:21.619 [main] ERROR c.e.o.s.i.AdServiceImpl - Ad Entity model not valid
+30.08.2023 16:25:21.633 [main] ERROR c.e.o.s.i.AdServiceImpl - Ad Entity model not valid
+30.08.2023 16:25:21.633 [main] ERROR c.e.o.s.i.AdServiceImpl - Ad Entity model not valid
+30.08.2023 16:25:21.853 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+30.08.2023 16:25:21.853 [SpringApplicationShutdownHook] INFO  o.h.t.s.i.SchemaDropperImpl$DelayedDropActionImpl - HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+30.08.2023 16:25:21.855 [SpringApplicationShutdownHook] WARN  c.z.h.p.ProxyConnection - HikariPool-1 - Connection org.postgresql.jdbc.PgConnection@7b882d7b marked as broken because of SQLSTATE(08006), ErrorCode(0)
+org.postgresql.util.PSQLException: Ошибка ввода/вывода при отправке бэкенду
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:382)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:490)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:408)
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:329)
+	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:315)
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:291)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:286)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl$DelayedDropActionImpl.perform(SchemaDropperImpl.java:554)
+	at org.hibernate.internal.SessionFactoryImpl.close(SessionFactoryImpl.java:845)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.invokeProxyMethod(AbstractEntityManagerFactoryBean.java:519)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean$ManagedEntityManagerFactoryInvocationHandler.invoke(AbstractEntityManagerFactoryBean.java:734)
+	at com.sun.proxy.$Proxy162.close(Unknown Source)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.destroy(AbstractEntityManagerFactoryBean.java:653)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:213)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1163)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1156)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1109)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1078)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.doClose(ServletWebServerApplicationContext.java:174)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:1024)
+	at org.springframework.boot.SpringApplicationShutdownHook.closeAndWait(SpringApplicationShutdownHook.java:145)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationShutdownHook.run(SpringApplicationShutdownHook.java:114)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.io.EOFException: null
+	at org.postgresql.core.PGStream.receiveChar(PGStream.java:455)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2119)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:355)
+	... 33 common frames omitted
+30.08.2023 16:25:21.856 [SpringApplicationShutdownHook] ERROR o.h.t.s.i.SchemaDropperImpl$DelayedDropActionImpl - HHH000478: Unsuccessful: alter table if exists ads drop constraint if exists FKhjy5cj20i6dn8t38as5poqt7b
+30.08.2023 16:25:21.856 [SpringApplicationShutdownHook] ERROR o.h.t.s.i.SchemaDropperImpl$DelayedDropActionImpl - HHH000478: Unsuccessful: alter table if exists comments drop constraint if exists FK8c6328vy3jubusjo17ucraqf1
+30.08.2023 16:25:21.857 [SpringApplicationShutdownHook] ERROR o.h.t.s.i.SchemaDropperImpl$DelayedDropActionImpl - HHH000478: Unsuccessful: alter table if exists comments drop constraint if exists FK8omq0tc18jd43bu5tjh6jvraq
+30.08.2023 16:25:21.857 [SpringApplicationShutdownHook] ERROR o.h.t.s.i.SchemaDropperImpl$DelayedDropActionImpl - HHH000478: Unsuccessful: drop table if exists ads cascade
+30.08.2023 16:25:21.857 [SpringApplicationShutdownHook] ERROR o.h.t.s.i.SchemaDropperImpl$DelayedDropActionImpl - HHH000478: Unsuccessful: drop table if exists comments cascade
+30.08.2023 16:25:21.857 [SpringApplicationShutdownHook] ERROR o.h.t.s.i.SchemaDropperImpl$DelayedDropActionImpl - HHH000478: Unsuccessful: drop table if exists users cascade
+30.08.2023 16:25:21.863 [SpringApplicationShutdownHook] INFO  c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
+30.08.2023 16:25:22.113 [SpringApplicationShutdownHook] INFO  c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.
+30.08.2023 16:26:15.071 [main] INFO  o.t.u.ImageNameSubstitutor - Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+30.08.2023 16:26:15.213 [main] INFO  o.t.d.DockerClientProviderStrategy - Loaded org.testcontainers.dockerclient.UnixSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+30.08.2023 16:26:15.463 [main] INFO  o.t.d.DockerClientProviderStrategy - Found Docker environment with local Unix socket (unix:///var/run/docker.sock)
+30.08.2023 16:26:15.464 [main] INFO  o.t.DockerClientFactory - Docker host IP address is localhost
+30.08.2023 16:26:15.483 [main] INFO  o.t.DockerClientFactory - Connected to docker: 
+  Server Version: 24.0.2
+  API Version: 1.43
+  Operating System: Docker Desktop
+  Total Memory: 7851 MB
+30.08.2023 16:26:15.499 [main] INFO  t.t.5.1 - Creating container for image: testcontainers/ryuk:0.5.1
+30.08.2023 16:26:15.774 [main] INFO  o.t.u.RegistryAuthLocator - Credential helper/store (docker-credential-desktop) does not have credentials for https://index.docker.io/v1/
+30.08.2023 16:26:15.849 [main] INFO  t.t.5.1 - Container testcontainers/ryuk:0.5.1 is starting: b37b021fc153fcd6728033d3fbce627c658695ef1d24fc16fe37356090437ad8
+30.08.2023 16:26:16.058 [main] INFO  t.t.5.1 - Container testcontainers/ryuk:0.5.1 started in PT0.56706S
+30.08.2023 16:26:16.062 [main] INFO  o.t.u.RyukResourceReaper - Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+30.08.2023 16:26:16.062 [main] INFO  o.t.DockerClientFactory - Checking the system...
+30.08.2023 16:26:16.062 [main] INFO  o.t.DockerClientFactory - ✔︎ Docker server version should be at least 1.6.0
+30.08.2023 16:26:16.063 [main] INFO  tc.postgres:15 - Creating container for image: postgres:15
+30.08.2023 16:26:16.081 [main] INFO  tc.postgres:15 - Container postgres:15 is starting: d77be384becbd1f61cd6d64142b4c1e77976c8394b1fddd5f5c7b797246b944f
+30.08.2023 16:26:16.970 [main] INFO  tc.postgres:15 - Container postgres:15 started in PT0.907041S
+30.08.2023 16:26:16.970 [main] INFO  tc.postgres:15 - Container is started (JDBC URL: jdbc:postgresql://localhost:53890/database_name?loggerLevel=OFF)
+30.08.2023 16:26:17.009 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.example.onlineresellingproject.repository.AdEntityRepoTest], using SpringBootContextLoader
+30.08.2023 16:26:17.011 [main] INFO  o.s.t.c.s.AbstractContextLoader - Could not detect default resource locations for test class [com.example.onlineresellingproject.repository.AdEntityRepoTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+30.08.2023 16:26:17.082 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener, org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener, org.springframework.security.test.context.support.ReactorContextTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener]
+30.08.2023 16:26:17.090 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@a451491, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@1422ac7f, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@5e519ad3, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@7bc44ce8, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@59072e9d, org.springframework.test.context.support.DirtiesContextTestExecutionListener@58472096, org.springframework.test.context.transaction.TransactionalTestExecutionListener@a92be4f, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@53e800f9, org.springframework.test.context.event.EventPublishingTestExecutionListener@337bbfdf, org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener@52d97ab6, org.springframework.security.test.context.support.ReactorContextTestExecutionListener@4da6d664, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@5e5af8e1, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@30b131b2, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@2924f1d8, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@524a076e, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@5b5e7036, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@62dbe64e]
+30.08.2023 16:26:17.281 [background-preinit] INFO  o.h.v.i.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+30.08.2023 16:26:17.286 [main] INFO  c.e.o.r.AdEntityRepoTest - Starting AdEntityRepoTest using Java 11.0.19 on MacBook-Pro-Oleg.local with PID 1108 (started by olegmetelev in /Users/olegmetelev/IdeaProjects/OnlineResellingProject)
+30.08.2023 16:26:17.287 [main] INFO  c.e.o.r.AdEntityRepoTest - The following 1 profile is active: "online_reselling_tests"
+30.08.2023 16:26:17.710 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+30.08.2023 16:26:17.748 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 33 ms. Found 3 JPA repository interfaces.
+30.08.2023 16:26:18.196 [main] INFO  o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 0 (http)
+30.08.2023 16:26:18.201 [main] INFO  o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
+30.08.2023 16:26:18.202 [main] INFO  o.a.c.c.StandardService - Starting service [Tomcat]
+30.08.2023 16:26:18.202 [main] INFO  o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.78]
+30.08.2023 16:26:18.269 [main] INFO  o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
+30.08.2023 16:26:18.269 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 971 ms
+30.08.2023 16:26:18.472 [main] INFO  c.z.h.HikariDataSource - HikariPool-1 - Starting...
+30.08.2023 16:26:18.592 [main] INFO  c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+30.08.2023 16:26:18.675 [main] INFO  liquibase.database - Set default schema name to public
+30.08.2023 16:26:18.763 [main] INFO  l.lockservice - Successfully acquired change log lock
+30.08.2023 16:26:18.809 [main] INFO  liquibase.changelog - Creating database history table with name: public.databasechangelog
+30.08.2023 16:26:18.813 [main] INFO  liquibase.changelog - Reading from public.databasechangelog
+30.08.2023 16:26:18.871 [main] INFO  liquibase.changelog - Custom SQL executed
+30.08.2023 16:26:18.872 [main] INFO  liquibase.changelog - ChangeSet db.changelog/psql_database_script.sql::1::skygroundwater ran successfully in 28ms
+30.08.2023 16:26:18.888 [main] INFO  l.lockservice - Successfully released change log lock
+30.08.2023 16:26:18.940 [main] INFO  o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+30.08.2023 16:26:18.966 [main] INFO  o.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+30.08.2023 16:26:19.054 [main] INFO  o.h.a.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+30.08.2023 16:26:19.113 [main] INFO  o.h.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+30.08.2023 16:26:19.462 [main] WARN  o.h.e.j.s.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+30.08.2023 16:26:19.462 [main] WARN  o.h.e.j.s.SqlExceptionHelper - constraint "fkhjy5cj20i6dn8t38as5poqt7b" of relation "ads" does not exist, skipping
+30.08.2023 16:26:19.464 [main] WARN  o.h.e.j.s.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+30.08.2023 16:26:19.464 [main] WARN  o.h.e.j.s.SqlExceptionHelper - constraint "fk8c6328vy3jubusjo17ucraqf1" of relation "comments" does not exist, skipping
+30.08.2023 16:26:19.466 [main] WARN  o.h.e.j.s.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+30.08.2023 16:26:19.466 [main] WARN  o.h.e.j.s.SqlExceptionHelper - constraint "fk8omq0tc18jd43bu5tjh6jvraq" of relation "comments" does not exist, skipping
+30.08.2023 16:26:19.472 [main] WARN  o.h.e.j.s.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+30.08.2023 16:26:19.472 [main] WARN  o.h.e.j.s.SqlExceptionHelper - drop cascades to constraint comments_ads_id_fk on table comments
+30.08.2023 16:26:19.491 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+30.08.2023 16:26:19.496 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+30.08.2023 16:26:19.513 [main] INFO  c.e.o.s.i.FilesServiceImpl - File service init method
+30.08.2023 16:26:19.513 [main] INFO  c.e.o.s.i.FilesServiceImpl - File service init method
+30.08.2023 16:26:19.945 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+30.08.2023 16:26:20.690 [main] INFO  o.s.s.w.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@3199c2c1, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@74c997b1, org.springframework.security.web.context.SecurityContextPersistenceFilter@30b5225b, org.springframework.security.web.header.HeaderWriterFilter@61defefb, org.springframework.web.filter.CorsFilter@593f6c3, org.springframework.security.web.authentication.logout.LogoutFilter@591e27f1, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@79927a7c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@35b97c69, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@39a8905b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4afb2c90, org.springframework.security.web.session.SessionManagementFilter@19d483dc, org.springframework.security.web.access.ExceptionTranslationFilter@47bcb545, org.springframework.security.web.access.intercept.AuthorizationFilter@6cd8aee2]
+30.08.2023 16:26:20.958 [main] INFO  o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
+30.08.2023 16:26:20.979 [main] INFO  o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 54017 (http) with context path ''
+30.08.2023 16:26:20.986 [main] INFO  c.e.o.r.AdEntityRepoTest - Started AdEntityRepoTest in 3.874 seconds (JVM running for 6.366)
+30.08.2023 16:26:21.397 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+30.08.2023 16:26:21.397 [SpringApplicationShutdownHook] INFO  o.h.t.s.i.SchemaDropperImpl$DelayedDropActionImpl - HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+30.08.2023 16:26:21.400 [SpringApplicationShutdownHook] WARN  c.z.h.p.ProxyConnection - HikariPool-1 - Connection org.postgresql.jdbc.PgConnection@35a49a90 marked as broken because of SQLSTATE(08006), ErrorCode(0)
+org.postgresql.util.PSQLException: Ошибка ввода/вывода при отправке бэкенду
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:382)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:490)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:408)
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:329)
+	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:315)
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:291)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:286)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl$DelayedDropActionImpl.perform(SchemaDropperImpl.java:554)
+	at org.hibernate.internal.SessionFactoryImpl.close(SessionFactoryImpl.java:845)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.invokeProxyMethod(AbstractEntityManagerFactoryBean.java:519)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean$ManagedEntityManagerFactoryInvocationHandler.invoke(AbstractEntityManagerFactoryBean.java:734)
+	at com.sun.proxy.$Proxy153.close(Unknown Source)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.destroy(AbstractEntityManagerFactoryBean.java:653)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:213)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1163)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1156)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1109)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1078)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.doClose(ServletWebServerApplicationContext.java:174)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:1024)
+	at org.springframework.boot.SpringApplicationShutdownHook.closeAndWait(SpringApplicationShutdownHook.java:145)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationShutdownHook.run(SpringApplicationShutdownHook.java:114)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.io.EOFException: null
+	at org.postgresql.core.PGStream.receiveChar(PGStream.java:455)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2119)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:355)
+	... 33 common frames omitted
+30.08.2023 16:26:21.401 [SpringApplicationShutdownHook] ERROR o.h.t.s.i.SchemaDropperImpl$DelayedDropActionImpl - HHH000478: Unsuccessful: alter table if exists ads drop constraint if exists FKhjy5cj20i6dn8t38as5poqt7b
+30.08.2023 16:26:21.401 [SpringApplicationShutdownHook] ERROR o.h.t.s.i.SchemaDropperImpl$DelayedDropActionImpl - HHH000478: Unsuccessful: alter table if exists comments drop constraint if exists FK8c6328vy3jubusjo17ucraqf1
+30.08.2023 16:26:21.401 [SpringApplicationShutdownHook] ERROR o.h.t.s.i.SchemaDropperImpl$DelayedDropActionImpl - HHH000478: Unsuccessful: alter table if exists comments drop constraint if exists FK8omq0tc18jd43bu5tjh6jvraq
+30.08.2023 16:26:21.401 [SpringApplicationShutdownHook] ERROR o.h.t.s.i.SchemaDropperImpl$DelayedDropActionImpl - HHH000478: Unsuccessful: drop table if exists ads cascade
+30.08.2023 16:26:21.401 [SpringApplicationShutdownHook] ERROR o.h.t.s.i.SchemaDropperImpl$DelayedDropActionImpl - HHH000478: Unsuccessful: drop table if exists comments cascade
+30.08.2023 16:26:21.401 [SpringApplicationShutdownHook] ERROR o.h.t.s.i.SchemaDropperImpl$DelayedDropActionImpl - HHH000478: Unsuccessful: drop table if exists users cascade
+30.08.2023 16:26:21.403 [SpringApplicationShutdownHook] INFO  c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
+30.08.2023 16:26:21.658 [SpringApplicationShutdownHook] INFO  c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.

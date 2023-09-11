@@ -27,6 +27,9 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+/**
+ * Класс-контроллер для обработки запросов, связанных с пользователями.
+ */
 @Slf4j
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
@@ -36,6 +39,14 @@ public class UserController {
 
     private final UserService userService;
 
+    /**
+     * Метод для обновления пароля пользователя.
+     *
+     * @param newPassword Новый пароль пользователя.
+     * @return Ответ с кодом состояния HTTP 201 (Created) после успешного обновления пароля.
+     * Если пользователь не авторизован, вернется код состояния HTTP 401 (Unauthorized).
+     * Если запрос недопустим, вернется код состояния HTTP 403 (Forbidden).
+     */
     @Operation(
             summary = "Обновление пароля пользователя",
             responses = {
@@ -68,8 +79,14 @@ public class UserController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
+    /**
+     * Метод для получения информации о текущем пользователе.
+     *
+     * @return Ответ с информацией о пользователе и кодом состояния HTTP 201 (Created).
+     * Если пользователь не авторизован, вернется код состояния HTTP 401 (Unauthorized).
+     */
     @Operation(
-            summary = "Получение получение информации о пользователе",
+            summary = "Получение информации о пользователе",
             responses = {
                     @ApiResponse(
                             responseCode = "201",
@@ -96,6 +113,13 @@ public class UserController {
                                 .getPrincipal()));
     }
 
+    /**
+     * Метод для обновления информации о текущем пользователе.
+     *
+     * @param updateUser Обновленные данные пользователя.
+     * @return Ответ с обновленной информацией о пользователе и кодом состояния HTTP 201 (Created).
+     * Если пользователь не авторизован, вернется код состояния HTTP 401 (Unauthorized).
+     */
     @Operation(
             summary = "Обновление информации о пользователе",
             responses = {
@@ -125,6 +149,13 @@ public class UserController {
                                         .getPrincipal(), updateUser));
     }
 
+    /**
+     * Метод для обновления аватара текущего пользователя.
+     *
+     * @param image Файл с новым аватаром пользователя.
+     * @return Ответ с кодом состояния HTTP 201 (Created) после успешного обновления аватара.
+     * Если пользователь не авторизован, вернется код состояния HTTP 401 (Unauthorized).
+     */
     @Operation(
             summary = "Обновление аватара пользователя",
             responses = {

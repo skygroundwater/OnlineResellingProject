@@ -7,17 +7,33 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
+/**
+ * Класс NestedUserInfo представляет информацию о пользователе, необходимую для встроенной (nested) структуры сообщений.
+ * Этот класс реализует Serializable, что позволяет сериализовать объекты для передачи данных между системами.
+ */
 @Data
 @EqualsAndHashCode
 @NoArgsConstructor
 final class NestedUserInfo implements Serializable {
 
+    /**
+     * Уникальный идентификатор пользователя.
+     */
     private Long id;
 
+    /**
+     * Имя пользователя.
+     */
     private String username;
 
+    /**
+     * Имя пользователя (first name).
+     */
     private String firstName;
 
+    /**
+     * Фамилия пользователя (last name).
+     */
     private String lastName;
 
     NestedUserInfo(UserEntity userEntity) {
@@ -27,6 +43,11 @@ final class NestedUserInfo implements Serializable {
         lastName = userEntity.getLastName();
     }
 
+    /**
+     * Возвращает строковое представление объекта NestedUserInfo.
+     *
+     * @return Строковое представление объекта с информацией о пользователе.
+     */
     public String toString() {
         return String.format("User id %s username : %s; firstname : %s; lastname : %s ",
                 id, username, firstName, lastName);

@@ -45,11 +45,26 @@ public class CommentEntity {
     @Column(name = "text")
     private String text;
 
+    /**
+     * Устанавливает поля сущности на основе данных из объекта CreateOrUpdateComment.
+     *
+     * @param createOrUpdateComment объект с данными для обновления сущности.
+     * @return текущая сущность CommentEntity.
+     */
     public final CommentEntity setFieldsAndReturnEntity(CreateOrUpdateComment createOrUpdateComment) {
         this.setText(createOrUpdateComment.getText());
         return this;
     }
 
+    /**
+     * Устанавливает поля сущности на основе данных из объекта CreateOrUpdateComment
+     * и связывает сущность с пользователем и объявлением.
+     *
+     * @param user                  пользователь, оставивший комментарий.
+     * @param adEntity              объявление, к которому оставлен комментарий.
+     * @param createOrUpdateComment объект с данными для обновления сущности.
+     * @return текущая сущность CommentEntity.
+     */
     public final CommentEntity setFieldsAndReturnEntity(
             UserEntity user, AdEntity adEntity, CreateOrUpdateComment createOrUpdateComment) {
         this.setText(createOrUpdateComment.getText());
